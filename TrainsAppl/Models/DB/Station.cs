@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace TrainsApp.Models.DB
+namespace TrainsAppl.Models.DB
 {
     public class Station
     {
@@ -12,7 +12,7 @@ namespace TrainsApp.Models.DB
         public int Id { get; set; }
         public int Platform { get; set; }
         public int Way { get; set; }
-        public Timetable Timetable { get; set; }
+        
 
     }
 }

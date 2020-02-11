@@ -63,6 +63,7 @@
     <Compile Include="Interfaces\IPresenter.cs" />
     <Compile Include="Interfaces\IView.cs" />
     <Compile Include="Models\DB\Station.cs" />
+    <Compile Include="Models\DB\TimetableList.cs" />
     <Compile Include="Models\DB\Timetable.cs" />
     <Compile Include="Models\DB\Train.cs" />
     <Compile Include="Models\DB\UserDB.cs" />
@@ -119,7 +120,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Presenters\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace TrainsApp.Models.DB
+namespace TrainsAppl.Models.DB
 {
     public class Train
     {
