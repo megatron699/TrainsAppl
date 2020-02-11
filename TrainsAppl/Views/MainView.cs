@@ -12,7 +12,7 @@ namespace TrainsAppl.Views
 {
     public partial class MainView : Form
     {
-        public MainView()
+        public MainView(bool userRole)
         {
             InitializeComponent();
         }
@@ -20,6 +20,11 @@ namespace TrainsAppl.Views
         private void ОткрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void выйтиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
