@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TrainsAppl.Models.DB
 {
@@ -12,6 +8,5 @@ namespace TrainsAppl.Models.DB
         public int Id { get; set; }
         public int TrainNumber { get; set; }
         public string Type { get; set; }
-        public int WagonCount { get; set; }
     }
 }

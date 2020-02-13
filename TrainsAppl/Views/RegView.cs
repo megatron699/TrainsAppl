@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using TrainsApp.DAL;
-using TrainsAppl.Models;
+using TrainsAppl.DAL;
+using TrainsAppl.Models.DB;
 
 namespace TrainsAppl.Views
 {
@@ -50,7 +44,7 @@ namespace TrainsAppl.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message,"Ошибка регистрации:");
             }
         }
      

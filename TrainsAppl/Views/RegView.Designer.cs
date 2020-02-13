@@ -46,7 +46,7 @@
             this.SignInButton.Margin = new System.Windows.Forms.Padding(4);
             this.SignInButton.Name = "SignInButton";
             this.SignInButton.Size = new System.Drawing.Size(337, 46);
-            this.SignInButton.TabIndex = 13;
+            this.SignInButton.TabIndex = 4;
             this.SignInButton.Text = "Зарегистрироваться";
             this.SignInButton.UseVisualStyleBackColor = true;
             this.SignInButton.Click += new System.EventHandler(this.SignInButton_Click);
@@ -57,7 +57,7 @@
             this.LoginButton.Margin = new System.Windows.Forms.Padding(4);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(73, 34);
-            this.LoginButton.TabIndex = 12;
+            this.LoginButton.TabIndex = 5;
             this.LoginButton.Text = "Войти";
             this.LoginButton.UseVisualStyleBackColor = true;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
@@ -69,7 +69,7 @@
             this.PassBox.Margin = new System.Windows.Forms.Padding(4);
             this.PassBox.Name = "PassBox";
             this.PassBox.Size = new System.Drawing.Size(336, 22);
-            this.PassBox.TabIndex = 11;
+            this.PassBox.TabIndex = 1;
             this.PassBox.UseSystemPasswordChar = true;
             // 
             // label1
@@ -108,7 +108,7 @@
             this.LoginBox.Margin = new System.Windows.Forms.Padding(4);
             this.LoginBox.Name = "LoginBox";
             this.LoginBox.Size = new System.Drawing.Size(336, 22);
-            this.LoginBox.TabIndex = 7;
+            this.LoginBox.TabIndex = 0;
             // 
             // ConfirmBox
             // 
@@ -117,7 +117,7 @@
             this.ConfirmBox.Margin = new System.Windows.Forms.Padding(4);
             this.ConfirmBox.Name = "ConfirmBox";
             this.ConfirmBox.Size = new System.Drawing.Size(336, 22);
-            this.ConfirmBox.TabIndex = 15;
+            this.ConfirmBox.TabIndex = 2;
             this.ConfirmBox.UseSystemPasswordChar = true;
             // 
             // label2
@@ -137,7 +137,7 @@
             this.checkRole.Margin = new System.Windows.Forms.Padding(4);
             this.checkRole.Name = "checkRole";
             this.checkRole.Size = new System.Drawing.Size(320, 21);
-            this.checkRole.TabIndex = 16;
+            this.checkRole.TabIndex = 3;
             this.checkRole.Text = "Поставьте галочку, если вы администратор";
             this.checkRole.UseVisualStyleBackColor = true;
             // 

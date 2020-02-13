@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using TrainsAppl.Models;
+﻿using System.Data.Entity;
 using TrainsAppl.Models.DB;
 
-namespace TrainsApp.DAL
+namespace TrainsAppl.DAL
 {
     public class TrainDBContext:DbContext
     {
@@ -19,6 +14,11 @@ namespace TrainsApp.DAL
         {
 
         }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Conventions.Remove<IncludeMetadataConvention>();
+        //    //base.OnModelCreating(modelBuilder);
+        //}
 
         public DbSet<UserDB> Users { get; set; }
         public DbSet<Station> Stations { get; set; }

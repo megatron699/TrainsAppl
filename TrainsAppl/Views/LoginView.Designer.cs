@@ -52,7 +52,7 @@
             this.LogLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LogLabel.Name = "LogLabel";
             this.LogLabel.Size = new System.Drawing.Size(47, 17);
-            this.LogLabel.TabIndex = 1;
+            this.LogLabel.TabIndex = 5;
             this.LogLabel.Text = "Логин";
             // 
             // PassLabel
@@ -62,7 +62,7 @@
             this.PassLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PassLabel.Name = "PassLabel";
             this.PassLabel.Size = new System.Drawing.Size(57, 17);
-            this.PassLabel.TabIndex = 2;
+            this.PassLabel.TabIndex = 6;
             this.PassLabel.Text = "Пароль";
             // 
             // label1
@@ -72,7 +72,7 @@
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 17);
-            this.label1.TabIndex = 3;
+            this.label1.TabIndex = 7;
             this.label1.Text = "Нет аккаунта?";
             // 
             // PassBox
@@ -82,7 +82,7 @@
             this.PassBox.Margin = new System.Windows.Forms.Padding(4);
             this.PassBox.Name = "PassBox";
             this.PassBox.Size = new System.Drawing.Size(273, 22);
-            this.PassBox.TabIndex = 4;
+            this.PassBox.TabIndex = 2;
             this.PassBox.UseSystemPasswordChar = true;
             // 
             // LoginButton
@@ -91,7 +91,7 @@
             this.LoginButton.Margin = new System.Windows.Forms.Padding(4);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(277, 47);
-            this.LoginButton.TabIndex = 5;
+            this.LoginButton.TabIndex = 3;
             this.LoginButton.Text = "Войти";
             this.LoginButton.UseVisualStyleBackColor = true;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
@@ -102,7 +102,7 @@
             this.SignUpButton.Margin = new System.Windows.Forms.Padding(4);
             this.SignUpButton.Name = "SignUpButton";
             this.SignUpButton.Size = new System.Drawing.Size(163, 28);
-            this.SignUpButton.TabIndex = 6;
+            this.SignUpButton.TabIndex = 4;
             this.SignUpButton.Text = "Зарегистрироваться";
             this.SignUpButton.UseVisualStyleBackColor = true;
             this.SignUpButton.Click += new System.EventHandler(this.SignInButton_Click);
