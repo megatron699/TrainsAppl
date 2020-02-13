@@ -19,28 +19,36 @@ namespace TrainsAppl.DAL
                 Password = "test123",
                 Role = true
             };
-            context.Users.Add(defaultUser);
-            train = new Train
-            {
-                TrainNumber = 301,
-                Type = "Пассажирский"
-            };
-            context.Trains.Add(train);
-            train = new Train
-            {
-                TrainNumber = 851,
-                Type = "Электропоезд"
-            };
-            context.Trains.Add(train);
-            train = new Train
-            {
-                TrainNumber = 901,
-                Type = "Товарный"
-            };
-            context.Trains.Add(train);
-            context.SaveChanges();
             
+            context.Users.Add(defaultUser);
+            for (int i = 0; i < 20; i++)
+            {
+                train = new Train
+                {
+                    TrainNumber = 301 + i * 7,
+                    Type = "Пассажирский"
+                };
+                context.Trains.Add(train);
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                train = new Train
+                {
+                    TrainNumber = 851 + i * 2,
+                    Type = "Электропоезд"
+                };
+                context.Trains.Add(train);
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                train = new Train
+                {
+                    TrainNumber = 901 + i * 7,
+                    Type = "Товарный"
+                };
+                context.Trains.Add(train);
+            }
+            context.SaveChanges();
         }
-
     }
 }
