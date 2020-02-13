@@ -7,16 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TrainsApp.DAL;
+using TrainsAppl.DAL;
+
 
 namespace TrainsAppl.Views
 {
-    public partial class LoginView : Form
+    public partial class LoginView : Form 
     {
         private readonly TrainDBContext _context = new TrainDBContext();
         public LoginView()
         {
-            _context.Users.First(c => c.Id == 1);
+            //_context.Users.First(c => c.Id == 1);
             InitializeComponent();
         }
         private void SignInButton_Click(object sender, EventArgs e)
@@ -46,7 +47,7 @@ namespace TrainsAppl.Views
             }
             catch( Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message,"Ошибка Аутентификации:");
             }
         }
     }
