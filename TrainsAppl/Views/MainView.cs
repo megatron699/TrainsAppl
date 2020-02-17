@@ -19,7 +19,14 @@ namespace TrainsAppl.Views
             InitializeComponent();
             if (!userRole)
             {
-
+                buttonEdit.Enabled = false;
+                buttonEdit.Hide();
+                создатьToolStripMenuItem.HideDropDown();
+                сохранитьToolStripMenuItem.HideDropDown();
+                сохранитьКакToolStripMenuItem.HideDropDown();
+                buttonChange.Hide();
+                buttonDelete.Hide();
+                buttonAdd.Hide();
             }
         }
 
