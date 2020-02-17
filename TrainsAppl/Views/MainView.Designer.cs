@@ -122,6 +122,7 @@
             this.расписаниеToolStripMenuItem.Name = "расписаниеToolStripMenuItem";
             this.расписаниеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.расписаниеToolStripMenuItem.Text = "Расписание";
+            this.расписаниеToolStripMenuItem.Click += new System.EventHandler(this.расписаниеToolStripMenuItem_Click);
             // 
             // открытьToolStripMenuItem
             // 
