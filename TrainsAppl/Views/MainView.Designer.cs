@@ -42,6 +42,12 @@
             this.выйтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.TopologyPage = new System.Windows.Forms.TabPage();
+            this.buttonConfirm = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
+            this.numericHeavyCount = new System.Windows.Forms.NumericUpDown();
+            this.labelHeavy = new System.Windows.Forms.Label();
+            this.numericPassCount = new System.Windows.Forms.NumericUpDown();
+            this.labelPass = new System.Windows.Forms.Label();
             this.panel = new System.Windows.Forms.Panel();
             this.mapBox = new System.Windows.Forms.PictureBox();
             this.TimeTablePage = new System.Windows.Forms.TabPage();
@@ -59,21 +65,15 @@
             this.labelModelTime = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.labelPass = new System.Windows.Forms.Label();
-            this.numericPassCount = new System.Windows.Forms.NumericUpDown();
-            this.labelHeavy = new System.Windows.Forms.Label();
-            this.numericHeavyCount = new System.Windows.Forms.NumericUpDown();
-            this.buttonEdit = new System.Windows.Forms.Button();
-            this.buttonConfirm = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.TopologyPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericHeavyCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPassCount)).BeginInit();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapBox)).BeginInit();
             this.TimeTablePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TimeTableGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericPassCount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericHeavyCount)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -190,6 +190,68 @@
             this.TopologyPage.Text = "Топология";
             this.TopologyPage.UseVisualStyleBackColor = true;
             // 
+            // buttonConfirm
+            // 
+            this.buttonConfirm.Enabled = false;
+            this.buttonConfirm.Location = new System.Drawing.Point(670, 148);
+            this.buttonConfirm.Name = "buttonConfirm";
+            this.buttonConfirm.Size = new System.Drawing.Size(83, 23);
+            this.buttonConfirm.TabIndex = 8;
+            this.buttonConfirm.Text = "Применить";
+            this.buttonConfirm.UseVisualStyleBackColor = true;
+            this.buttonConfirm.Visible = false;
+            this.buttonConfirm.Click += new System.EventHandler(this.ButtonConfirm_Click);
+            // 
+            // buttonEdit
+            // 
+            this.buttonEdit.Location = new System.Drawing.Point(664, 8);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(96, 25);
+            this.buttonEdit.TabIndex = 7;
+            this.buttonEdit.Text = "Редактировать";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.ButtonEdit_Click);
+            // 
+            // numericHeavyCount
+            // 
+            this.numericHeavyCount.Enabled = false;
+            this.numericHeavyCount.Location = new System.Drawing.Point(670, 121);
+            this.numericHeavyCount.Name = "numericHeavyCount";
+            this.numericHeavyCount.Size = new System.Drawing.Size(83, 20);
+            this.numericHeavyCount.TabIndex = 6;
+            this.numericHeavyCount.Visible = false;
+            this.numericHeavyCount.ValueChanged += new System.EventHandler(this.NumericHeavyCount_ValueChanged);
+            // 
+            // labelHeavy
+            // 
+            this.labelHeavy.AutoSize = true;
+            this.labelHeavy.Location = new System.Drawing.Point(671, 92);
+            this.labelHeavy.Name = "labelHeavy";
+            this.labelHeavy.Size = new System.Drawing.Size(95, 26);
+            this.labelHeavy.TabIndex = 5;
+            this.labelHeavy.Text = "Кол-во товарных \r\nпутей";
+            this.labelHeavy.Visible = false;
+            // 
+            // numericPassCount
+            // 
+            this.numericPassCount.Enabled = false;
+            this.numericPassCount.Location = new System.Drawing.Point(670, 50);
+            this.numericPassCount.Name = "numericPassCount";
+            this.numericPassCount.Size = new System.Drawing.Size(83, 20);
+            this.numericPassCount.TabIndex = 4;
+            this.numericPassCount.Visible = false;
+            this.numericPassCount.ValueChanged += new System.EventHandler(this.NumericPassCount_ValueChanged);
+            // 
+            // labelPass
+            // 
+            this.labelPass.AutoSize = true;
+            this.labelPass.Location = new System.Drawing.Point(671, 8);
+            this.labelPass.Name = "labelPass";
+            this.labelPass.Size = new System.Drawing.Size(83, 39);
+            this.labelPass.TabIndex = 3;
+            this.labelPass.Text = "Кол-во \r\nпассажирских \r\nпутей";
+            this.labelPass.Visible = false;
+            // 
             // panel
             // 
             this.panel.AutoScroll = true;
@@ -228,7 +290,7 @@
             this.buttonDelete.Location = new System.Drawing.Point(141, 537);
             this.buttonDelete.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(56, 19);
+            this.buttonDelete.Size = new System.Drawing.Size(61, 19);
             this.buttonDelete.TabIndex = 3;
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = true;
@@ -366,68 +428,6 @@
             this.labelTime.TabIndex = 3;
             this.labelTime.Text = "00:00";
             // 
-            // labelPass
-            // 
-            this.labelPass.AutoSize = true;
-            this.labelPass.Location = new System.Drawing.Point(671, 8);
-            this.labelPass.Name = "labelPass";
-            this.labelPass.Size = new System.Drawing.Size(83, 39);
-            this.labelPass.TabIndex = 3;
-            this.labelPass.Text = "Кол-во \r\nпассажирских \r\nпутей";
-            this.labelPass.Visible = false;
-            // 
-            // numericPassCount
-            // 
-            this.numericPassCount.Enabled = false;
-            this.numericPassCount.Location = new System.Drawing.Point(670, 50);
-            this.numericPassCount.Name = "numericPassCount";
-            this.numericPassCount.Size = new System.Drawing.Size(83, 20);
-            this.numericPassCount.TabIndex = 4;
-            this.numericPassCount.Visible = false;
-            this.numericPassCount.ValueChanged += new System.EventHandler(this.NumericPassCount_ValueChanged);
-            // 
-            // labelHeavy
-            // 
-            this.labelHeavy.AutoSize = true;
-            this.labelHeavy.Location = new System.Drawing.Point(671, 92);
-            this.labelHeavy.Name = "labelHeavy";
-            this.labelHeavy.Size = new System.Drawing.Size(95, 26);
-            this.labelHeavy.TabIndex = 5;
-            this.labelHeavy.Text = "Кол-во товарных \r\nпутей";
-            this.labelHeavy.Visible = false;
-            // 
-            // numericHeavyCount
-            // 
-            this.numericHeavyCount.Enabled = false;
-            this.numericHeavyCount.Location = new System.Drawing.Point(670, 121);
-            this.numericHeavyCount.Name = "numericHeavyCount";
-            this.numericHeavyCount.Size = new System.Drawing.Size(83, 20);
-            this.numericHeavyCount.TabIndex = 6;
-            this.numericHeavyCount.Visible = false;
-            this.numericHeavyCount.ValueChanged += new System.EventHandler(this.NumericHeavyCount_ValueChanged);
-            // 
-            // buttonEdit
-            // 
-            this.buttonEdit.Location = new System.Drawing.Point(664, 8);
-            this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(96, 25);
-            this.buttonEdit.TabIndex = 7;
-            this.buttonEdit.Text = "Редактировать";
-            this.buttonEdit.UseVisualStyleBackColor = true;
-            this.buttonEdit.Click += new System.EventHandler(this.ButtonEdit_Click);
-            // 
-            // buttonConfirm
-            // 
-            this.buttonConfirm.Enabled = false;
-            this.buttonConfirm.Location = new System.Drawing.Point(670, 148);
-            this.buttonConfirm.Name = "buttonConfirm";
-            this.buttonConfirm.Size = new System.Drawing.Size(83, 23);
-            this.buttonConfirm.TabIndex = 8;
-            this.buttonConfirm.Text = "Применить";
-            this.buttonConfirm.UseVisualStyleBackColor = true;
-            this.buttonConfirm.Visible = false;
-            this.buttonConfirm.Click += new System.EventHandler(this.ButtonConfirm_Click);
-            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -445,13 +445,13 @@
             this.tabControl.ResumeLayout(false);
             this.TopologyPage.ResumeLayout(false);
             this.TopologyPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericHeavyCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPassCount)).EndInit();
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapBox)).EndInit();
             this.TimeTablePage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TimeTableGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericPassCount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericHeavyCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
