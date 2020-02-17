@@ -114,7 +114,7 @@
             // топологиюToolStripMenuItem
             // 
             this.топологиюToolStripMenuItem.Name = "топологиюToolStripMenuItem";
-            this.топологиюToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.топологиюToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.топологиюToolStripMenuItem.Text = "Топологию";
             // 
             // расписаниеToolStripMenuItem
@@ -127,21 +127,21 @@
             // открытьToolStripMenuItem
             // 
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.открытьToolStripMenuItem.Text = "Открыть";
             this.открытьToolStripMenuItem.Click += new System.EventHandler(this.ОткрытьToolStripMenuItem_Click);
             // 
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.СохранитьToolStripMenuItem_Click);
             // 
             // сохранитьКакToolStripMenuItem
             // 
             this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
-            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.сохранитьКакToolStripMenuItem.Text = "Сохранить как ...";
             this.сохранитьКакToolStripMenuItem.Click += new System.EventHandler(this.СохранитьКакToolStripMenuItem_Click);
             // 
@@ -154,7 +154,7 @@
             // оРазработчикахToolStripMenuItem
             // 
             this.оРазработчикахToolStripMenuItem.Name = "оРазработчикахToolStripMenuItem";
-            this.оРазработчикахToolStripMenuItem.Size = new System.Drawing.Size(112, 20);
+            this.оРазработчикахToolStripMenuItem.Size = new System.Drawing.Size(113, 20);
             this.оРазработчикахToolStripMenuItem.Text = "О разработчиках";
             // 
             // выйтиToolStripMenuItem
@@ -168,10 +168,10 @@
             // 
             this.tabControl.Controls.Add(this.TopologyPage);
             this.tabControl.Controls.Add(this.TimeTablePage);
-            this.tabControl.Location = new System.Drawing.Point(13, 27);
+            this.tabControl.Location = new System.Drawing.Point(13, 28);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(768, 586);
+            this.tabControl.Size = new System.Drawing.Size(768, 585);
             this.tabControl.TabIndex = 1;
             // 
             // TopologyPage
@@ -186,7 +186,7 @@
             this.TopologyPage.Location = new System.Drawing.Point(4, 22);
             this.TopologyPage.Name = "TopologyPage";
             this.TopologyPage.Padding = new System.Windows.Forms.Padding(3);
-            this.TopologyPage.Size = new System.Drawing.Size(760, 560);
+            this.TopologyPage.Size = new System.Drawing.Size(760, 559);
             this.TopologyPage.TabIndex = 0;
             this.TopologyPage.Text = "Топология";
             this.TopologyPage.UseVisualStyleBackColor = true;
@@ -281,7 +281,7 @@
             this.TimeTablePage.Location = new System.Drawing.Point(4, 22);
             this.TimeTablePage.Name = "TimeTablePage";
             this.TimeTablePage.Padding = new System.Windows.Forms.Padding(3);
-            this.TimeTablePage.Size = new System.Drawing.Size(760, 560);
+            this.TimeTablePage.Size = new System.Drawing.Size(760, 559);
             this.TimeTablePage.TabIndex = 1;
             this.TimeTablePage.Text = "Расписание";
             this.TimeTablePage.UseVisualStyleBackColor = true;
@@ -291,7 +291,7 @@
             this.buttonDelete.Location = new System.Drawing.Point(141, 537);
             this.buttonDelete.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(56, 19);
+            this.buttonDelete.Size = new System.Drawing.Size(61, 19);
             this.buttonDelete.TabIndex = 3;
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = true;

@@ -23,15 +23,27 @@ namespace TrainsAppl.Views
             InitializeComponent();
             if (!userRole)
             {
-
+                buttonEdit.Enabled = false;
+                buttonEdit.Hide();
+                создатьToolStripMenuItem.HideDropDown();
+                сохранитьToolStripMenuItem.HideDropDown();
+                сохранитьКакToolStripMenuItem.HideDropDown();
+                buttonChange.Hide();
+                buttonDelete.Hide();
+                buttonAdd.Hide();
             }
         }
 
         private void ОткрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            Path = openFile.FileName;
+
+            if (tabControl.SelectedIndex.Equals(0)) { }
+            else 
+            {
+              OpenFileDialog openFile = new OpenFileDialog();
+              openFile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+              Path = openFile.FileName;
+            }
 
         }
         private void СохранитьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -42,26 +54,32 @@ namespace TrainsAppl.Views
 
         private void СохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Timetable timetable = new Timetable();
-            SaveFileDialog saveFile = new SaveFileDialog();
-         
-            saveFile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            Path = saveFile.FileName;
-
-            if (Records != null)
+            if (tabControl.SelectedIndex.Equals(0)) { }
+            else {        
+            private void СохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
             {
+               Timetable timetable = new Timetable();
+                SaveFileDialog saveFile = new SaveFileDialog();
+         
+               saveFile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+               Path = saveFile.FileName;
 
-                var record = Records.First;
-                using (StreamWriter streamWriter = new StreamWriter(Path))
-                {
-                    while (record != null)
+                if (Records != null)
+               {
+
+                    var record = Records.First;
+                   using (StreamWriter streamWriter = new StreamWriter(Path))
                     {
-                        streamWriter.WriteLine($"{timetable.TrainNumber},{timetable.Type},{timetable.Way}, {timetable.Platform}, " +
-                            $"{timetable.Destination}, {timetable.DepartureTime}, {timetable.ArrivalTime}");
-                        record = record.Next;
-                    }
-                }
+                       while (record != null)
+                        {
+                            streamWriter.WriteLine($"{timetable.TrainNumber},{timetable.Type},{timetable.Way}, {timetable.Platform}, " +
+                                $"{timetable.Destination}, {timetable.DepartureTime}, {timetable.ArrivalTime}");
+                            record = record.Next;
+                       }
+                   }
+                } 
             }
+
         }
 
         private void выйтиToolStripMenuItem_Click(object sender, EventArgs e)
@@ -85,7 +103,9 @@ namespace TrainsAppl.Views
                     throw new Exception("Выберите один пункт расписания");
                 else
                 {
+
                     AddView addView = new AddView(Convert.ToInt32(TimeTableGrid[0, TimeTableGrid.CurrentRow.Index]), Records);
+
                     addView.ShowDialog();
                 }
             }
@@ -166,6 +186,7 @@ namespace TrainsAppl.Views
             numericPassCount.Visible = true;
             buttonConfirm.Enabled = true;
             buttonConfirm.Visible = true;
+
         }
         public void UpdateTable(LinkedList<Timetable> Records)
         {
@@ -195,5 +216,5 @@ namespace TrainsAppl.Views
         }
     }
 
-   
+
 }
