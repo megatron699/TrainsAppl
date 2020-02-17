@@ -55,10 +55,9 @@ namespace TrainsAppl.Views
         private void СохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (tabControl.SelectedIndex.Equals(0)) { }
-            else {        
-            private void СохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
-            {
-               Timetable timetable = new Timetable();
+            else 
+            {        
+                Timetable timetable = new Timetable();
                 SaveFileDialog saveFile = new SaveFileDialog();
          
                saveFile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
