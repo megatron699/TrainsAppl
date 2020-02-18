@@ -65,6 +65,11 @@
             this.labelModelTime = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.buttonStop = new System.Windows.Forms.Button();
+            this.buttonPause = new System.Windows.Forms.Button();
+            this.buttonPlay = new System.Windows.Forms.Button();
+            this.TimeMode = new System.Windows.Forms.TrackBar();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.TopologyPage.SuspendLayout();
@@ -74,6 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.mapBox)).BeginInit();
             this.TimeTablePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TimeTableGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TimeMode)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -134,6 +140,7 @@
             // 
             // сохранитьToolStripMenuItem
             // 
+            this.сохранитьToolStripMenuItem.Enabled = false;
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
             this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
@@ -141,6 +148,7 @@
             // 
             // сохранитьКакToolStripMenuItem
             // 
+            this.сохранитьКакToolStripMenuItem.Enabled = false;
             this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
             this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.сохранитьКакToolStripMenuItem.Text = "Сохранить как ...";
@@ -206,6 +214,7 @@
             // 
             // buttonEdit
             // 
+            this.buttonEdit.Enabled = false;
             this.buttonEdit.Location = new System.Drawing.Point(664, 8);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(96, 25);
@@ -299,6 +308,7 @@
             // 
             // buttonDelete
             // 
+            this.buttonDelete.Enabled = false;
             this.buttonDelete.Location = new System.Drawing.Point(141, 537);
             this.buttonDelete.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete.Name = "buttonDelete";
@@ -309,6 +319,7 @@
             // 
             // buttonChange
             // 
+            this.buttonChange.Enabled = false;
             this.buttonChange.Location = new System.Drawing.Point(75, 537);
             this.buttonChange.Margin = new System.Windows.Forms.Padding(2);
             this.buttonChange.Name = "buttonChange";
@@ -320,6 +331,7 @@
             // 
             // buttonAdd
             // 
+            this.buttonAdd.Enabled = false;
             this.buttonAdd.Location = new System.Drawing.Point(5, 537);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
@@ -423,7 +435,7 @@
             // labelModelTime
             // 
             this.labelModelTime.AutoSize = true;
-            this.labelModelTime.Location = new System.Drawing.Point(247, 632);
+            this.labelModelTime.Location = new System.Drawing.Point(179, 632);
             this.labelModelTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelModelTime.Name = "labelModelTime";
             this.labelModelTime.Size = new System.Drawing.Size(102, 13);
@@ -433,18 +445,83 @@
             // labelTime
             // 
             this.labelTime.AutoSize = true;
-            this.labelTime.Location = new System.Drawing.Point(349, 632);
+            this.labelTime.Location = new System.Drawing.Point(285, 632);
             this.labelTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTime.Name = "labelTime";
             this.labelTime.Size = new System.Drawing.Size(34, 13);
             this.labelTime.TabIndex = 3;
             this.labelTime.Text = "00:00";
             // 
+            // buttonStop
+            // 
+            this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonStop.Enabled = false;
+            this.buttonStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonStop.Location = new System.Drawing.Point(127, 632);
+            this.buttonStop.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(48, 41);
+            this.buttonStop.TabIndex = 7;
+            this.buttonStop.Text = "■";
+            this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.ButtonStop_Click);
+            // 
+            // buttonPause
+            // 
+            this.buttonPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonPause.Enabled = false;
+            this.buttonPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonPause.Location = new System.Drawing.Point(75, 632);
+            this.buttonPause.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonPause.Name = "buttonPause";
+            this.buttonPause.Size = new System.Drawing.Size(48, 41);
+            this.buttonPause.TabIndex = 6;
+            this.buttonPause.Text = "❚❚";
+            this.buttonPause.UseVisualStyleBackColor = true;
+            this.buttonPause.Click += new System.EventHandler(this.ButtonPause_Click);
+            // 
+            // buttonPlay
+            // 
+            this.buttonPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonPlay.Enabled = false;
+            this.buttonPlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonPlay.Location = new System.Drawing.Point(23, 632);
+            this.buttonPlay.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonPlay.Name = "buttonPlay";
+            this.buttonPlay.Size = new System.Drawing.Size(48, 41);
+            this.buttonPlay.TabIndex = 5;
+            this.buttonPlay.Text = "▶";
+            this.buttonPlay.UseVisualStyleBackColor = true;
+            this.buttonPlay.Click += new System.EventHandler(this.ButtonPlay_Click);
+            // 
+            // TimeMode
+            // 
+            this.TimeMode.Enabled = false;
+            this.TimeMode.LargeChange = 1;
+            this.TimeMode.Location = new System.Drawing.Point(324, 628);
+            this.TimeMode.Maximum = 2;
+            this.TimeMode.Name = "TimeMode";
+            this.TimeMode.Size = new System.Drawing.Size(104, 45);
+            this.TimeMode.TabIndex = 8;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(182, 659);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(136, 14);
+            this.progressBar.TabIndex = 9;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 693);
+            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.TimeMode);
+            this.Controls.Add(this.buttonStop);
+            this.Controls.Add(this.buttonPause);
+            this.Controls.Add(this.buttonPlay);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.labelModelTime);
             this.Controls.Add(this.tabControl);
@@ -464,6 +541,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.mapBox)).EndInit();
             this.TimeTablePage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TimeTableGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TimeMode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -507,5 +585,10 @@
         private System.Windows.Forms.Label labelPass;
         private System.Windows.Forms.Button buttonConfirm;
         private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.Button buttonStop;
+        private System.Windows.Forms.Button buttonPause;
+        private System.Windows.Forms.Button buttonPlay;
+        private System.Windows.Forms.TrackBar TimeMode;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }

@@ -15,15 +15,22 @@ namespace TrainsAppl.Views
     public partial class AddView : Form
     {
         LinkedList<Timetable> records;
+        Timetable timetable;
       //  MainView view;
         private readonly TrainDBContext _context = new TrainDBContext();
         public AddView(int timeTableId, LinkedList<Timetable> records)
         {
             this.records = records;
             InitializeComponent();
-            if (timeTableId > -1) 
+            if (timeTableId > -1)
             {
-
+                var timetable = _context.Timetables.FirstOrDefault(time => time.Id == timeTableId);
+                trainNumBox.Text = timetable.TrainNumber.ToString();
+                trainTypeBox.Text = timetable.Type;
+                departueBox.Text = timetable.Destination;
+                depTimePicker.Value = timetable.DepartureTime;
+                arrTimePicker.Value = timetable.ArrivalTime;
+                countUpDown.Value = timetable.WagonCount;
             }
         }
 
@@ -34,8 +41,8 @@ namespace TrainsAppl.Views
 
         private void acceptButton_Click(object sender, EventArgs e)
         {
-
-            Timetable timetable = new Timetable
+ 
+                Timetable timetable  = new Timetable
             {
                 TrainNumber = int.Parse(trainNumBox.Text),
                 Type = trainTypeBox.Text,
@@ -44,7 +51,7 @@ namespace TrainsAppl.Views
                 ArrivalTime = arrTimePicker.Value,
                 WagonCount = int.Parse(countUpDown.Text)
             };
-            _context.ArrivalDeparture.Add(timetable);
+            _context.Timetables.Add(timetable);
             _context.SaveChanges();
             try
             {
