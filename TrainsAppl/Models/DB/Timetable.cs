@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace TrainsAppl.Models.DB
@@ -15,6 +16,7 @@ namespace TrainsAppl.Models.DB
         public DateTime ArrivalTime { get; set; }
         public string Type { get; set; }
         public int WagonCount { get; set; }
+
 
     }
 }
