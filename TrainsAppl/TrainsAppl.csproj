@@ -108,6 +108,18 @@
     <Compile Include="Views\AddView.Designer.cs">
       <DependentUpon>AddView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\DevView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DevView.Designer.cs">
+      <DependentUpon>DevView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LabView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LabView.Designer.cs">
+      <DependentUpon>LabView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +150,12 @@
     </Compile>
     <EmbeddedResource Include="Views\AddView.resx">
       <DependentUpon>AddView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DevView.resx">
+      <DependentUpon>DevView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LabView.resx">
+      <DependentUpon>LabView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
