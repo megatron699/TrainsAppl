@@ -290,7 +290,7 @@ namespace TrainsAppl.Views
             UpdateTable(Records);
             buttonChange.Enabled = true;
             buttonAdd.Enabled = true;
-            buttonChange.Enabled = true;
+            buttonDelete.Enabled = true;
         }
 
         private void ТопологиюToolStripMenuItem_Click(object sender, EventArgs e)
@@ -433,7 +433,29 @@ namespace TrainsAppl.Views
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-
+            if (TimeTableGrid.Rows.Count != 1)
+            {
+                int index = TimeTableGrid.CurrentRow.Index;
+                Delete(index);
+                UpdateTable(Records);
+            }
+            else MessageBox.Show("Нельзя удалить единственный элемент таблицы.", "Ошибка изменения расписания:");
+        }
+        public void Delete(int index)
+        {
+            LinkedListNode<Timetable> node = Records.First;
+            while (index != 0 && node != null)
+            {
+                index--;
+                node = node.Next;
+            }
+            if (index == 0)
+            {
+                Timetable ttInDb = _context.Timetables.Where(c => c.Id == node.Value.Id).FirstOrDefault();
+                Records.Remove(node.Value);
+                _context.Timetables.Remove(ttInDb);
+                _context.SaveChanges();
+            }
         }
     }
 }

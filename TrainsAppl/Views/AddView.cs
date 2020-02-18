@@ -41,8 +41,20 @@ namespace TrainsAppl.Views
 
         private void acceptButton_Click(object sender, EventArgs e)
         {
- 
-                Timetable timetable  = new Timetable
+            try  {int.Parse(trainNumBox.Text); }
+            catch { throw new Exception("Недопустимое значение - "); }
+            //if trainTypeBox.Text =  { int.Parse(trainNumBox.Text); }
+            //catch { throw new Exception("Недопустимое значение - "); }
+            //try { int.Parse(trainNumBox.Text); }
+            //catch { throw new Exception("Недопустимое значение - "); }
+            //try { int.Parse(trainNumBox.Text); }
+            //catch { throw new Exception("Недопустимое значение - "); }
+            //try { int.Parse(trainNumBox.Text); }
+            //catch { throw new Exception("Недопустимое значение - "); }
+            //try { int.Parse(trainNumBox.Text); }
+            //catch { throw new Exception("Недопустимое значение - "); }
+
+            Timetable timetable  = new Timetable
             {
                 TrainNumber = int.Parse(trainNumBox.Text),
                 Type = trainTypeBox.Text,

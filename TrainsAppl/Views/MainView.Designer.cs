@@ -180,7 +180,7 @@
             this.tabControl.Controls.Add(this.TopologyPage);
             this.tabControl.Controls.Add(this.TimeTablePage);
             this.tabControl.Location = new System.Drawing.Point(17, 34);
-            this.tabControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1024, 720);
@@ -196,9 +196,9 @@
             this.TopologyPage.Controls.Add(this.labelPass);
             this.TopologyPage.Controls.Add(this.panel);
             this.TopologyPage.Location = new System.Drawing.Point(4, 25);
-            this.TopologyPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TopologyPage.Margin = new System.Windows.Forms.Padding(4);
             this.TopologyPage.Name = "TopologyPage";
-            this.TopologyPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TopologyPage.Padding = new System.Windows.Forms.Padding(4);
             this.TopologyPage.Size = new System.Drawing.Size(1016, 691);
             this.TopologyPage.TabIndex = 0;
             this.TopologyPage.Text = "Топология";
@@ -208,7 +208,7 @@
             // 
             this.buttonConfirm.Enabled = false;
             this.buttonConfirm.Location = new System.Drawing.Point(893, 182);
-            this.buttonConfirm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonConfirm.Margin = new System.Windows.Forms.Padding(4);
             this.buttonConfirm.Name = "buttonConfirm";
             this.buttonConfirm.Size = new System.Drawing.Size(111, 28);
             this.buttonConfirm.TabIndex = 8;
@@ -221,7 +221,7 @@
             // 
             this.buttonEdit.Enabled = false;
             this.buttonEdit.Location = new System.Drawing.Point(885, 10);
-            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(128, 31);
             this.buttonEdit.TabIndex = 7;
@@ -233,7 +233,7 @@
             // 
             this.numericHeavyCount.Enabled = false;
             this.numericHeavyCount.Location = new System.Drawing.Point(893, 149);
-            this.numericHeavyCount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericHeavyCount.Margin = new System.Windows.Forms.Padding(4);
             this.numericHeavyCount.Name = "numericHeavyCount";
             this.numericHeavyCount.Size = new System.Drawing.Size(111, 22);
             this.numericHeavyCount.TabIndex = 6;
@@ -255,7 +255,7 @@
             // 
             this.numericPassCount.Enabled = false;
             this.numericPassCount.Location = new System.Drawing.Point(893, 62);
-            this.numericPassCount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericPassCount.Margin = new System.Windows.Forms.Padding(4);
             this.numericPassCount.Minimum = new decimal(new int[] {
             1,
             0,
@@ -288,7 +288,7 @@
             this.panel.AutoScroll = true;
             this.panel.Controls.Add(this.mapBox);
             this.panel.Location = new System.Drawing.Point(8, 7);
-            this.panel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel.Margin = new System.Windows.Forms.Padding(4);
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(877, 673);
             this.panel.TabIndex = 2;
@@ -310,9 +310,9 @@
             this.TimeTablePage.Controls.Add(this.buttonAdd);
             this.TimeTablePage.Controls.Add(this.TimeTableGrid);
             this.TimeTablePage.Location = new System.Drawing.Point(4, 25);
-            this.TimeTablePage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TimeTablePage.Margin = new System.Windows.Forms.Padding(4);
             this.TimeTablePage.Name = "TimeTablePage";
-            this.TimeTablePage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TimeTablePage.Padding = new System.Windows.Forms.Padding(4);
             this.TimeTablePage.Size = new System.Drawing.Size(1016, 691);
             this.TimeTablePage.TabIndex = 1;
             this.TimeTablePage.Text = "Расписание";
@@ -321,7 +321,7 @@
             // buttonDelete
             // 
             this.buttonDelete.Enabled = false;
-            this.buttonDelete.Location = new System.Drawing.Point(188, 644);
+            this.buttonDelete.Location = new System.Drawing.Point(198, 644);
             this.buttonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(81, 40);
@@ -336,7 +336,7 @@
             this.buttonChange.Location = new System.Drawing.Point(100, 644);
             this.buttonChange.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonChange.Name = "buttonChange";
-            this.buttonChange.Size = new System.Drawing.Size(82, 40);
+            this.buttonChange.Size = new System.Drawing.Size(92, 40);
             this.buttonChange.TabIndex = 2;
             this.buttonChange.Text = "Изменить";
             this.buttonChange.UseVisualStyleBackColor = true;
@@ -378,7 +378,7 @@
             this.TimeTableGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.TimeTableGrid.RowTemplate.Height = 24;
             this.TimeTableGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.TimeTableGrid.Size = new System.Drawing.Size(928, 633);
+            this.TimeTableGrid.Size = new System.Drawing.Size(1006, 633);
             this.TimeTableGrid.TabIndex = 0;
             // 
             // ColTrainNum
@@ -511,7 +511,7 @@
             this.TimeMode.Enabled = false;
             this.TimeMode.LargeChange = 1;
             this.TimeMode.Location = new System.Drawing.Point(432, 773);
-            this.TimeMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TimeMode.Margin = new System.Windows.Forms.Padding(4);
             this.TimeMode.Maximum = 2;
             this.TimeMode.Name = "TimeMode";
             this.TimeMode.Size = new System.Drawing.Size(139, 56);
@@ -520,7 +520,7 @@
             // progressBar
             // 
             this.progressBar.Location = new System.Drawing.Point(243, 811);
-            this.progressBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.progressBar.Margin = new System.Windows.Forms.Padding(4);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(181, 17);
             this.progressBar.TabIndex = 9;
@@ -541,7 +541,7 @@
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainView";
             this.Text = "TrainsAppl";
             this.menuStrip1.ResumeLayout(false);
