@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace TrainsAppl.Models.DB
 {
@@ -8,6 +9,7 @@ namespace TrainsAppl.Models.DB
         public int Id { get; set; }
         public int Platform { get; set; }
         public int Way { get; set; }
+        public string Schema { get; set; }
         
 
     }

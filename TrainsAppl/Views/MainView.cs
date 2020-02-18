@@ -19,6 +19,7 @@ namespace TrainsAppl.Views
     {
         private readonly TrainDBContext _context = new TrainDBContext();
         public bool isPaused;
+        private DateTime modelTime;
 
         public LinkedList<Timetable> Records { get; set; }
         public string Path { get; set; }
@@ -49,7 +50,23 @@ namespace TrainsAppl.Views
 
             if (tabControl.SelectedIndex.Equals(0))
             {
+                OpenFileDialog openFile = new OpenFileDialog();
+                openFile.Filter = "Image Files (*.png)|*.png|All files (*.*)|*.*";
+                if (openFile.ShowDialog() == DialogResult.OK)
+                {
+                    Path = openFile.FileName;
+                    mapBox.Load(Path);
+                    var seekTop = _context.Stations.FirstOrDefault(station => station.Schema == Path);
+                    if (seekTop != null)
+                    {
+                        ТопологиюToolStripMenuItem_Click(sender, e);
+                        numericPassCount.Value = seekTop.Platform;
+                        numericHeavyCount.Value = seekTop.Way;
+                        ButtonConfirm_Click(sender, e);
+                    }
 
+
+                }
                 //buttonEdit.Enabled = true;
                 //сохранитьToolStripMenuItem.Enabled = true;
                 //сохранитьКакToolStripMenuItem.Enabled = true;
@@ -73,8 +90,21 @@ namespace TrainsAppl.Views
             if (tabControl.SelectedIndex.Equals(0))
             {
                 SaveFileDialog saveFile = new SaveFileDialog();
-                saveFile.Filter = "Image Files(*.PNG)";
-                Path = saveFile.FileName;
+                saveFile.Filter = "Image Files (*.PNG)|*.png|All files (*.*)|*.*";
+                if (saveFile.ShowDialog() == DialogResult.OK)
+                {
+
+                    Path = saveFile.FileName;
+                    mapBox.Image.Save(Path, System.Drawing.Imaging.ImageFormat.Png);
+                    Station station = new Station
+                    {
+                        Schema = Path,
+                        Platform = (int)numericPassCount.Value,
+                        Way = (int)numericHeavyCount.Value
+                    };
+                    _context.Stations.Add(station);
+                    _context.SaveChanges();
+                }
             }
             else
             {
@@ -98,6 +128,8 @@ namespace TrainsAppl.Views
                         }
                     }
                 }
+
+
             }
 
         }
@@ -111,7 +143,7 @@ namespace TrainsAppl.Views
         {
             AddView addView = new AddView(-1, Records);
             addView.ShowDialog();
-
+            UpdateTable(Records);
         }
 
         private void buttonChange_Click(object sender, EventArgs e)
@@ -305,8 +337,18 @@ namespace TrainsAppl.Views
 
         private void ButtonPlay_Click(object sender, EventArgs e)
         {
-            
-            Thread timeThread = new Thread(time);
+            DateTime dt;
+            int[] orderArr = new int[TimeTableGrid.Rows.Count];
+            int[] orderDep = new int[TimeTableGrid.Rows.Count];
+            for (int i = 0; i < TimeTableGrid.Rows.Count; i++)
+            {
+                dt = (DateTime)TimeTableGrid.Rows[i].Cells[4].Value;
+                orderArr[i] = dt.Hour * 60 + dt.Minute;
+                dt = (DateTime)TimeTableGrid.Rows[i].Cells[5].Value;
+                orderDep[i] = dt.Hour * 60 + dt.Minute;
+            }
+            timer1.Start();
+        //    Thread timeThread = new Thread(time);
         }
 
         private void ButtonPause_Click(object sender, EventArgs e)
@@ -322,13 +364,76 @@ namespace TrainsAppl.Views
         }
         static void time()
         {
-            timer1.Enabled = true;
+          // timer1.Enabled = true;
 
         }
-        private void timer1_Tick(object sender, EventArgs e)
+        
+         private void timer1_Tick(object sender, EventArgs e)
         {
-            Thread.Sleep(0);
+            //Records;
+            //dateLabel.Text = modelTime.Date.ToString();
+            labelTime.Text = modelTime.TimeOfDay.ToString();
+            //if (modelTime.CompareTo(currentDepartureTime) == 0)
+            //{
+            //    isFlyDone = true;
+            //    setDublicates();
+            //    dataGridView1.Rows.Remove(dataGridView1.Rows[0]);
+            //    if (dataGridView1.Rows.Count > 1)
+            //    {
+            //        if ((string)dataGridView1.Rows[0].Cells[1].Value == "Самара")
+            //        {
+            //            currentDepartureTime = Convert.ToDateTime(dataGridView1.Rows[0].Cells[3].Value.ToString());
+            //            currentTime = currentDepartureTime;
+            //        }
+            //        else
+            //        {
+            //            currentArrivalTime = Convert.ToDateTime(dataGridView1.Rows[0].Cells[4].Value.ToString());
+            //            currentTime = currentArrivalTime;
+            //        }
+            //        SelectAirplane();
+            //    }
+            //    SetStartState();
+            //}
+            //if (isFlyDone)
+            //{
+            //    DrawFlyAwayAirplane();
+            //    MoveBaggageLoader1();
+            //    MoveBus1();
+            //}
+            //if (currentAirplaneOnDeparture != null)
+            //{
+            //    DriveOutHanger();
+            //}
+            //if (currentAirplaneOnArrival != null)
+            //{
+            //    DriveIntoHanger();
+            //    MoveBaggageLoader2();
+            //    MoveBus2();
+            //}
+
+
+
+
+
+
+
         }
 
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LabView labView = new LabView();
+            labView.ShowDialog();
+        }
+
+        private void оРазработчикахToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DevView devView = new DevView();
+            devView.ShowDialog();
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
