@@ -116,6 +116,7 @@
             this.топологиюToolStripMenuItem.Name = "топологиюToolStripMenuItem";
             this.топологиюToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.топологиюToolStripMenuItem.Text = "Топологию";
+            this.топологиюToolStripMenuItem.Click += new System.EventHandler(this.ТопологиюToolStripMenuItem_Click);
             // 
             // расписаниеToolStripMenuItem
             // 
@@ -237,9 +238,19 @@
             // 
             this.numericPassCount.Enabled = false;
             this.numericPassCount.Location = new System.Drawing.Point(670, 50);
+            this.numericPassCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericPassCount.Name = "numericPassCount";
             this.numericPassCount.Size = new System.Drawing.Size(83, 20);
             this.numericPassCount.TabIndex = 4;
+            this.numericPassCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericPassCount.Visible = false;
             this.numericPassCount.ValueChanged += new System.EventHandler(this.NumericPassCount_ValueChanged);
             // 
