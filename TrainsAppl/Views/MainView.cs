@@ -168,23 +168,24 @@ namespace TrainsAppl.Views
         {
             using (G = Graphics.FromImage(mapBox.Image))
             {
-                int j = new int();
+                int j = 1;
                 G.Clear(Color.White);
                 G.DrawImage(Properties.Resources.DefaultPicture, Topology.sector[0, 0]);
                 if (numericPassCount.Value != 1)
-                for (int ji = 2; ji < numericPassCount.Value; ji++)
+                for (int ji = 1; ji < numericPassCount.Value; ji++)
                 {
                     for (int i = 0; i < Topology.sector.GetLength(0); i += 3)
                     {
                         G.DrawImage(Properties.Resources.rail, Topology.sector[i, ji * 2 + 3]);
                     }
-                    if (j != 1) Platform.AddPlatform(G, Topology.sector[0, 6 + (j - 2) / 2 * 4], mapBox.Height);
+                    if (ji != 0) Platform.AddPlatform(G, Topology.sector[0, 6 + (ji - 1) / 2 * 4], mapBox.Height);
+                        j++;
                 }
-                while (j < numericHeavyCount.Value)
+                for (int ji = 0; ji < numericHeavyCount.Value; ji++)
                 {
                     for (int i = 0; i < Topology.sector.GetLength(0); i += 3)
                     {
-                        G.DrawImage(Properties.Resources.rail, Topology.sector[i, j * 2 + 3]);
+                        G.DrawImage(Properties.Resources.rail, Topology.sector[i, j * 2 + 4]);
                     }
                     j++;
                 }
