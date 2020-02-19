@@ -19,14 +19,23 @@ namespace TrainsAppl.Views
     {
         private readonly TrainDBContext _context = new TrainDBContext();
         public bool isPaused;
-        private DateTime modelTime;
+        public bool isRunned;
+        private TimeSpan modelTime;
+        public TimeSpan[] minute = new TimeSpan[3];
+        
 
-        public LinkedList<Timetable> Records { get; set; }
-        public string Path { get; set; }
+
+
+    public string PathT { get; set; }
+    public LinkedList<Timetable> Records { get; set; }
+        public string PathR { get; set; }
         public Graphics G { get; set; }
         public Image DefaultImage { get; set; }
         public Pointer Topology { get; set; }
         public bool TopExist { get; set; }
+        public int Tick { get; set; }
+        public string TTime { get; set; }
+        public Thread Thread { get; set; }
         public MainView(bool userRole)
         {
             InitializeComponent();
@@ -41,7 +50,9 @@ namespace TrainsAppl.Views
                 buttonDelete.Hide();
                 buttonAdd.Hide();
             }
-
+            minute[0] = TimeSpan.FromMinutes(24);
+            minute[1] = TimeSpan.FromMinutes(5);
+            minute[2] = TimeSpan.FromMinutes(1);
         }
 
 
@@ -54,14 +65,14 @@ namespace TrainsAppl.Views
                 openFile.Filter = "Image Files (*.png)|*.png|All files (*.*)|*.*";
                 if (openFile.ShowDialog() == DialogResult.OK)
                 {
-                    Path = openFile.FileName;
-                    mapBox.Load(Path);
-                    var seekTop = _context.Stations.FirstOrDefault(station => station.Schema == Path);
+                    PathT = openFile.FileName;
+                    mapBox.Load(PathT);
+                    var seekTop = _context.Stations.FirstOrDefault(station => station.Schema == PathT);
                     if (seekTop != null)
                     {
                         ТопологиюToolStripMenuItem_Click(sender, e);
-                        numericPassCount.Value = seekTop.Platform;
-                        numericHeavyCount.Value = seekTop.Way;
+                        numericPassCount.Value = seekTop.PassCount;
+                        numericHeavyCount.Value = seekTop.HeavyCount;
                         ButtonConfirm_Click(sender, e);
                     }
 
@@ -73,62 +84,165 @@ namespace TrainsAppl.Views
             }
             else
             {
-                OpenFileDialog openFile = new OpenFileDialog();
-                openFile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-                Path = openFile.FileName;
+                
+                    OpenFileDialog openFile = new OpenFileDialog();
+                    openFile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                    if (openFile.ShowDialog() == DialogResult.OK)
+                    {
+                        Records = new LinkedList<Timetable>();
+                        PathR = openFile.FileName;
+                        TimeTableGrid.Rows.Clear();
+                        using (StreamReader streamReader = new StreamReader(PathR))
+                        {
+                        //string line = streamReader.ReadLine();
+                        //while (line != null)
+                        //{
+                        //    if (line != null)
+                        //    {
+                        //        var record = line.Split(',');
+                        //        //Records.AddLast(new Timetable(int.Parse(record[1]), record[2], 
+                        //        //    record[3], DateTime.Parse( record[4]), DateTime.Parse(record[5])));
+
+                        //    }
+                        //    line = streamReader.ReadLine();
+                        //}
+                        var seekRasp = _context.Timetables.FirstOrDefault(time => time.Set == PathR) ;
+                        while (seekRasp != null)
+                        {
+                            Records.AddLast(seekRasp);
+                            seekRasp = _context.Timetables.FirstOrDefault(time => time.Set == PathR);
+                        }
+                        UpdateTable(Records);
+                            buttonChange.Enabled = true;
+                            buttonAdd.Enabled = true;
+                            buttonDelete.Enabled = true;
+                        }
+                    }
+                
+
             }
 
         }
         private void СохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (tabControl.SelectedIndex.Equals(0)) { }
-            else { }
+            if (tabControl.SelectedIndex.Equals(0))
+            {
+                if (PathT == "")
+                    СохранитьКакToolStripMenuItem_Click(sender, e);
+                else
+                {
+                    
+                    mapBox.Image.Save(PathT, System.Drawing.Imaging.ImageFormat.Png);
+                    Station station = new Station
+                    {
+                        Schema = PathT,
+                        PassCount = (int)numericPassCount.Value,
+                        HeavyCount = (int)numericHeavyCount.Value
+                    };
+                    _context.Stations.Add(station);
+                    _context.SaveChanges();
+                }
+
+            }
+            else
+            {
+                if (PathR == "")
+                       СохранитьКакToolStripMenuItem_Click(sender, e);
+                    else
+                    {
+                    
+                    if (Records != null)
+                    {
+
+                        var record = Records.First;
+                        using (StreamWriter streamWriter = new StreamWriter(PathR))
+                        {
+                            while (record != null)
+                            {
+                                var timetable = _context.Timetables.FirstOrDefault(time => time.Id == record.Value.Id);
+                                if (timetable != null)
+                                {
+                                    streamWriter.WriteLine($"{timetable.TrainNumber},{timetable.Type},{timetable.Departue}, {timetable.Destination}, " +
+                                    $"{timetable.ArrivalTime}, {timetable.DepartureTime}, {timetable.WagonCount}");
+
+
+                                    _context.Timetables.Remove(timetable);
+                                    timetable.Set = PathR;
+                                    _context.Timetables.Add(timetable);
+                                    _context.SaveChanges();
+                                    record = record.Next;
+                                }
+                            }
+                        }
+                    }
+
+                }
+                
+            }
         }
 
         private void СохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (tabControl.SelectedIndex.Equals(0))
             {
-                SaveFileDialog saveFile = new SaveFileDialog();
-                saveFile.Filter = "Image Files (*.PNG)|*.png|All files (*.*)|*.*";
-                if (saveFile.ShowDialog() == DialogResult.OK)
+                if (mapBox.Image != null)
                 {
-
-                    Path = saveFile.FileName;
-                    mapBox.Image.Save(Path, System.Drawing.Imaging.ImageFormat.Png);
-                    Station station = new Station
+                    SaveFileDialog saveFile = new SaveFileDialog();
+                    saveFile.Filter = "Image Files (*.PNG)|*.png|All files (*.*)|*.*";
+                    if (saveFile.ShowDialog() == DialogResult.OK)
                     {
-                        Schema = Path,
-                        Platform = (int)numericPassCount.Value,
-                        Way = (int)numericHeavyCount.Value
-                    };
-                    _context.Stations.Add(station);
-                    _context.SaveChanges();
+
+                        PathT = saveFile.FileName;
+                        mapBox.Image.Save(PathT, System.Drawing.Imaging.ImageFormat.Png);
+                        Station station = new Station
+                        {
+                            Schema = PathT,
+                            PassCount = (int)numericPassCount.Value,
+                            HeavyCount = (int)numericHeavyCount.Value
+                        };
+                        _context.Stations.Add(station);
+                        _context.SaveChanges();
+                    }
                 }
             }
             else
             {
-                Timetable timetable = new Timetable();
-                SaveFileDialog saveFile = new SaveFileDialog();
-
-                saveFile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-                Path = saveFile.FileName;
-
-                if (Records != null)
+                if (TimeTableGrid.Rows.Count != 0)
                 {
+                    
+                    SaveFileDialog saveFile = new SaveFileDialog();
 
-                    var record = Records.First;
-                    using (StreamWriter streamWriter = new StreamWriter(Path))
+                    saveFile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+
+                    if (saveFile.ShowDialog() == DialogResult.OK)
                     {
-                        while (record != null)
+                        PathR = saveFile.FileName;
+                        if (Records != null)
                         {
-                            streamWriter.WriteLine($"{timetable.TrainNumber},{timetable.Type},{timetable.Way}, {timetable.Platform}, " +
-                                $"{timetable.Destination}, {timetable.DepartureTime}, {timetable.ArrivalTime}");
-                            record = record.Next;
+
+                            var record = Records.First;
+                            using (StreamWriter streamWriter = new StreamWriter(PathR))
+                            {
+                                while (record != null)
+                                {
+                                    var timetable = _context.Timetables.FirstOrDefault(time => time.Id == record.Value.Id);
+                                    if (timetable != null)
+                                    {
+                                        streamWriter.WriteLine($"{timetable.TrainNumber},{timetable.Type},{timetable.Departue}, {timetable.Destination}, " +
+                                        $"{timetable.ArrivalTime}, {timetable.DepartureTime}, {timetable.WagonCount}");
+
+
+                                        _context.Timetables.Remove(timetable);
+                                        timetable.Set = PathR;
+                                        _context.Timetables.Add(timetable);
+                                        _context.SaveChanges();
+                                        record = record.Next;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
-
 
             }
 
@@ -180,9 +294,7 @@ namespace TrainsAppl.Views
                     numericPassCount.DownButton();
                     throw new Exception("Пожалуйста, хватит...");
                 }
-                else
-                {
-                }
+                
 
             }
             catch (Exception ex)
@@ -200,10 +312,7 @@ namespace TrainsAppl.Views
                     numericHeavyCount.DownButton();
                     throw new Exception("Пожалуйста, хватит...");
                 }
-                else
-                {
-
-                }
+                
             }
             catch (Exception ex)
             {
@@ -269,15 +378,14 @@ namespace TrainsAppl.Views
             if (Records.First != null)
             {
                 LinkedListNode<Timetable> node = Records.First;
-                TimeTableGrid.Rows.Add(node.Value.TrainNumber.ToString(), node.Value.Type.ToString(), node.Value.Way.ToString(),
-                    node.Value.Platform.ToString(), node.Value.Destination.ToString(), node.Value.ArrivalTime.ToString(),
-                    node.Value.DepartureTime.ToString());
+                TimeTableGrid.Rows.Add(node.Value.TrainNumber.ToString(), node.Value.Type.ToString(), node.Value.Departue,
+                    node.Value.Destination, node.Value.ArrivalTime.ToString(), node.Value.DepartureTime.ToString());
                 while (node.Next != null)
                 {
-                    node = node.Next;
-                    TimeTableGrid.Rows.Add(node.Value.TrainNumber.ToString(), node.Value.Type.ToString(), node.Value.Way.ToString(),
-                    node.Value.Platform.ToString(), node.Value.Destination.ToString(), node.Value.ArrivalTime.ToString(),
-                    node.Value.DepartureTime.ToString());
+                    
+                       node = node.Next;
+                    TimeTableGrid.Rows.Add(node.Value.TrainNumber.ToString(), node.Value.Type.ToString(), node.Value.Departue,
+                    node.Value.Destination, node.Value.ArrivalTime.ToString(), node.Value.DepartureTime.ToString());
                 }
             }
         }
@@ -329,50 +437,79 @@ namespace TrainsAppl.Views
                 }
             }
             buttonEdit.Enabled = true;
-            сохранитьToolStripMenuItem.Enabled = true;
-            сохранитьКакToolStripMenuItem.Enabled = true;
+            
             //       DefaultImage = mapBox.Image;
             //       DefaultImage.Save("C:\\Users\\Maximus\\Source\\Repos\\TrainsAppl\\TrainsAppl\\Resources\\DefaultPicture.png", System.Drawing.Imaging.ImageFormat.Png);
         }
 
         private void ButtonPlay_Click(object sender, EventArgs e)
         {
-            DateTime dt;
-            int[] orderArr = new int[TimeTableGrid.Rows.Count];
-            int[] orderDep = new int[TimeTableGrid.Rows.Count];
-            for (int i = 0; i < TimeTableGrid.Rows.Count; i++)
+            if (isPaused == false)
             {
-                dt = (DateTime)TimeTableGrid.Rows[i].Cells[4].Value;
-                orderArr[i] = dt.Hour * 60 + dt.Minute;
-                dt = (DateTime)TimeTableGrid.Rows[i].Cells[5].Value;
-                orderDep[i] = dt.Hour * 60 + dt.Minute;
+                DateTime dt;
+                int[] orderArr = new int[TimeTableGrid.Rows.Count];
+                int[] orderDep = new int[TimeTableGrid.Rows.Count];
+                for (int i = 0; i < TimeTableGrid.Rows.Count; i++)
+                {
+                    dt = (DateTime)TimeTableGrid.Rows[i].Cells[4].Value;
+                    orderArr[i] = dt.Hour * 60 + dt.Minute;
+                    dt = (DateTime)TimeTableGrid.Rows[i].Cells[5].Value;
+                    orderDep[i] = dt.Hour * 60 + dt.Minute;
+                }
+                modelTime = TimeSpan.Parse("0");
+                Tick = 0;
             }
-            timer1.Start();
-        //    Thread timeThread = new Thread(time);
+            isPaused = false;
+            isRunned = true;
+            Thread = new Thread(new ThreadStart(time(isRunned, isPaused)));
+            Thread.Start();
+            
+            // time(Tick, isRunned, isPaused);
+            //   timer1.Start();
+            //    Thread timeThread = new Thread(time);
         }
 
         private void ButtonPause_Click(object sender, EventArgs e)
         {
-            timer1.Stop();
+         //   timer1.Stop();
             isPaused = true;
         }
 
         private void ButtonStop_Click(object sender, EventArgs e)
         {
-            timer1.Stop();
-            isPaused = false;
+         //   timer1.Stop();
+            isRunned = false;
         }
-        static void time()
+        static void time(bool isRunned, bool isPaused)
         {
-          // timer1.Enabled = true;
+            while ((isRunned) && (!isPaused))
+            {
+                Thread.Sleep(1000);
+
+                modelTime.Add(minute[TimeMode.Value]);
+                try
+                {
+                    progressBar.Value += minute[TimeMode.Value].Minutes;
+                }
+                catch { isRunned = false; }
+                if (!isPaused)
+                {
+
+
+                    if (isRunned)
+                    {
+                        labelTime.Text = modelTime.Hours.ToString() + ":" + modelTime.Minutes.ToString();
+                    }
+                }
+            }
+            // timer1.Enabled = true;
 
         }
         
-         private void timer1_Tick(object sender, EventArgs e)
-        {
+       //  private void timer1_Tick(object sender, EventArgs e) {
             //Records;
             //dateLabel.Text = modelTime.Date.ToString();
-            labelTime.Text = modelTime.TimeOfDay.ToString();
+            //labelTime.Text = modelTime.TimeOfDay.ToString();
             //if (modelTime.CompareTo(currentDepartureTime) == 0)
             //{
             //    isFlyDone = true;
@@ -409,15 +546,7 @@ namespace TrainsAppl.Views
             //    DriveIntoHanger();
             //    MoveBaggageLoader2();
             //    MoveBus2();
-            //}
-
-
-
-
-
-
-
-        }
+            //}}
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {

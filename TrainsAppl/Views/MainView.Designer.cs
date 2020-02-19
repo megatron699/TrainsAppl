@@ -57,11 +57,12 @@
             this.TimeTableGrid = new System.Windows.Forms.DataGridView();
             this.ColTrainNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTrainType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColWay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColPlatform = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColDepartue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDestination = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColArrTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDepTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColWay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColPlatform = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelModelTime = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -93,7 +94,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1083, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1065, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -114,7 +115,7 @@
             this.топологиюToolStripMenuItem,
             this.расписаниеToolStripMenuItem});
             this.создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
-            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.создатьToolStripMenuItem.Text = "Создать";
             // 
             // топологиюToolStripMenuItem
@@ -134,23 +135,21 @@
             // открытьToolStripMenuItem
             // 
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.открытьToolStripMenuItem.Text = "Открыть";
             this.открытьToolStripMenuItem.Click += new System.EventHandler(this.ОткрытьToolStripMenuItem_Click);
             // 
             // сохранитьToolStripMenuItem
             // 
-            this.сохранитьToolStripMenuItem.Enabled = false;
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.СохранитьToolStripMenuItem_Click);
             // 
             // сохранитьКакToolStripMenuItem
             // 
-            this.сохранитьКакToolStripMenuItem.Enabled = false;
             this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
-            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.сохранитьКакToolStripMenuItem.Text = "Сохранить как ...";
             this.сохранитьКакToolStripMenuItem.Click += new System.EventHandler(this.СохранитьКакToolStripMenuItem_Click);
             // 
@@ -179,11 +178,11 @@
             // 
             this.tabControl.Controls.Add(this.TopologyPage);
             this.tabControl.Controls.Add(this.TimeTablePage);
-            this.tabControl.Location = new System.Drawing.Point(17, 34);
+            this.tabControl.Location = new System.Drawing.Point(13, 32);
             this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1024, 720);
+            this.tabControl.Size = new System.Drawing.Size(1039, 722);
             this.tabControl.TabIndex = 1;
             // 
             // TopologyPage
@@ -199,7 +198,7 @@
             this.TopologyPage.Margin = new System.Windows.Forms.Padding(4);
             this.TopologyPage.Name = "TopologyPage";
             this.TopologyPage.Padding = new System.Windows.Forms.Padding(4);
-            this.TopologyPage.Size = new System.Drawing.Size(1016, 691);
+            this.TopologyPage.Size = new System.Drawing.Size(1031, 693);
             this.TopologyPage.TabIndex = 0;
             this.TopologyPage.Text = "Топология";
             this.TopologyPage.UseVisualStyleBackColor = true;
@@ -313,7 +312,7 @@
             this.TimeTablePage.Margin = new System.Windows.Forms.Padding(4);
             this.TimeTablePage.Name = "TimeTablePage";
             this.TimeTablePage.Padding = new System.Windows.Forms.Padding(4);
-            this.TimeTablePage.Size = new System.Drawing.Size(1016, 691);
+            this.TimeTablePage.Size = new System.Drawing.Size(1031, 693);
             this.TimeTablePage.TabIndex = 1;
             this.TimeTablePage.Text = "Расписание";
             this.TimeTablePage.UseVisualStyleBackColor = true;
@@ -365,11 +364,12 @@
             this.TimeTableGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColTrainNum,
             this.ColTrainType,
-            this.ColWay,
-            this.ColPlatform,
+            this.ColDepartue,
             this.ColDestination,
             this.ColArrTime,
-            this.ColDepTime});
+            this.ColDepTime,
+            this.ColWay,
+            this.ColPlatform});
             this.TimeTableGrid.Location = new System.Drawing.Point(7, 7);
             this.TimeTableGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TimeTableGrid.Name = "TimeTableGrid";
@@ -400,32 +400,23 @@
             this.ColTrainType.ReadOnly = true;
             this.ColTrainType.Width = 104;
             // 
-            // ColWay
+            // ColDepartue
             // 
-            this.ColWay.Frozen = true;
-            this.ColWay.HeaderText = "Путь";
-            this.ColWay.MinimumWidth = 6;
-            this.ColWay.Name = "ColWay";
-            this.ColWay.ReadOnly = true;
-            this.ColWay.Width = 68;
-            // 
-            // ColPlatform
-            // 
-            this.ColPlatform.Frozen = true;
-            this.ColPlatform.HeaderText = "Платформа";
-            this.ColPlatform.MinimumWidth = 6;
-            this.ColPlatform.Name = "ColPlatform";
-            this.ColPlatform.ReadOnly = true;
-            this.ColPlatform.Width = 114;
+            this.ColDepartue.Frozen = true;
+            this.ColDepartue.HeaderText = "Отбытие";
+            this.ColDepartue.MinimumWidth = 6;
+            this.ColDepartue.Name = "ColDepartue";
+            this.ColDepartue.ReadOnly = true;
+            this.ColDepartue.Width = 96;
             // 
             // ColDestination
             // 
             this.ColDestination.Frozen = true;
-            this.ColDestination.HeaderText = "Назначение/отбытие";
+            this.ColDestination.HeaderText = "Назначение";
             this.ColDestination.MinimumWidth = 6;
             this.ColDestination.Name = "ColDestination";
             this.ColDestination.ReadOnly = true;
-            this.ColDestination.Width = 178;
+            this.ColDestination.Width = 118;
             // 
             // ColArrTime
             // 
@@ -444,6 +435,24 @@
             this.ColDepTime.Name = "ColDepTime";
             this.ColDepTime.ReadOnly = true;
             this.ColDepTime.Width = 154;
+            // 
+            // ColWay
+            // 
+            this.ColWay.Frozen = true;
+            this.ColWay.HeaderText = "Путь";
+            this.ColWay.MinimumWidth = 6;
+            this.ColWay.Name = "ColWay";
+            this.ColWay.ReadOnly = true;
+            this.ColWay.Width = 68;
+            // 
+            // ColPlatform
+            // 
+            this.ColPlatform.Frozen = true;
+            this.ColPlatform.HeaderText = "Платформа";
+            this.ColPlatform.MinimumWidth = 6;
+            this.ColPlatform.Name = "ColPlatform";
+            this.ColPlatform.ReadOnly = true;
+            this.ColPlatform.Width = 114;
             // 
             // labelModelTime
             // 
@@ -466,7 +475,6 @@
             // buttonStop
             // 
             this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonStop.Enabled = false;
             this.buttonStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonStop.Location = new System.Drawing.Point(169, 778);
             this.buttonStop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -480,7 +488,6 @@
             // buttonPause
             // 
             this.buttonPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonPause.Enabled = false;
             this.buttonPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonPause.Location = new System.Drawing.Point(100, 778);
             this.buttonPause.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -495,7 +502,6 @@
             // 
             this.buttonPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonPlay.Enabled = false;
             this.buttonPlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonPlay.Location = new System.Drawing.Point(31, 778);
             this.buttonPlay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -521,8 +527,10 @@
             // 
             this.progressBar.Location = new System.Drawing.Point(243, 811);
             this.progressBar.Margin = new System.Windows.Forms.Padding(4);
+            this.progressBar.Maximum = 1439;
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(181, 17);
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.TabIndex = 9;
             this.progressBar.Visible = false;
             // 
@@ -530,7 +538,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1083, 853);
+            this.ClientSize = new System.Drawing.Size(1065, 853);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.TimeMode);
             this.Controls.Add(this.buttonStop);
@@ -587,13 +595,6 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel panel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColTrainNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColTrainType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColWay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColPlatform;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColDestination;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColArrTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColDepTime;
         private System.Windows.Forms.NumericUpDown numericHeavyCount;
         private System.Windows.Forms.Label labelHeavy;
         private System.Windows.Forms.NumericUpDown numericPassCount;
@@ -605,5 +606,13 @@
         private System.Windows.Forms.Button buttonPlay;
         private System.Windows.Forms.TrackBar TimeMode;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColTrainNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColTrainType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColDepartue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColDestination;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColArrTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColDepTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColWay;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColPlatform;
     }
 }

@@ -91,7 +91,6 @@
     <Compile Include="DAL\TrainDBContext.cs" />
     <Compile Include="DAL\TrainDBInitializer.cs" />
     <Compile Include="Models\DB\Station.cs" />
-    <Compile Include="Models\DB\TimetableList.cs" />
     <Compile Include="Models\DB\Timetable.cs" />
     <Compile Include="Models\DB\Train.cs" />
     <Compile Include="Models\DB\UserDB.cs" />

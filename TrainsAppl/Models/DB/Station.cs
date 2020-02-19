@@ -7,8 +7,8 @@ namespace TrainsAppl.Models.DB
     {
         [Key]
         public int Id { get; set; }
-        public int Platform { get; set; }
-        public int Way { get; set; }
+        public int PassCount { get; set; }
+        public int HeavyCount { get; set; }
         public string Schema { get; set; }
         
 
