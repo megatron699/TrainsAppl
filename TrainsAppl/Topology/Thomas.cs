@@ -14,9 +14,9 @@ namespace TrainsAppl.Topology
         private Image rloco;
         private Image rvagon;
         private int count;
-        private byte type;
+        private int type;
 
-        public Thomas(int count, byte type)
+        public Thomas(int count, int type)
         {
             this.count = count;
             this.type = type;
@@ -75,7 +75,7 @@ namespace TrainsAppl.Topology
             count = value;
         }
 
-        public byte GetType()
+        public int GetType()
         {
             return type;
         }
@@ -105,7 +105,7 @@ namespace TrainsAppl.Topology
             rloco = value;
         }
 
-        public void Run(Graphics g, Pointer top, int way)
+        public void RunIn(Graphics g, Pointer top, int way)
         {
             if (this.GetType() == 1)
             {
