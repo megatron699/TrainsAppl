@@ -112,19 +112,57 @@ namespace TrainsAppl.Topology
                 g.DrawImage(this.GetRLoco(), top.sector[0, way * 2 + 1]);
                 for (int i = 1; i < this.GetCount(); i++) // первый пассажирский путь
                 {
-                    g.DrawImage(this.GetVagon(), top.sector[i * 3, way * 2 + 1]);
+                    try
+                    {
+                        g.DrawImage(this.GetVagon(), top.sector[i * 3, way * 2 + 1]);
+                    }
+                    catch { }
                 }
-                g.DrawImage(this.GetLoco(), top.sector[count * 3, way * 2 + 1]);
+                try
+                {
+                    g.DrawImage(this.GetLoco(), top.sector[count * 3, way * 2 + 1]);
+                }
+                catch { }
             }
 
             else
             {
                 for (int i = 0; i < this.GetCount(); i++) // первый пассажирский путь
                 {
-                    g.DrawImage(this.GetVagon(), top.sector[i * 2, way * 2 + 1]);
+                    try
+                    {
+                        g.DrawImage(this.GetVagon(), top.sector[i * 2, way * 2 + 1]);
+                    }
+                    catch { }
                 }
-                g.DrawImage(this.GetLoco(), top.sector[count * 2, way * 2 + 1]);
+                try
+                {
+                    g.DrawImage(this.GetLoco(), top.sector[count * 2, way * 2 + 1]);
+                }
+                catch { }
+                
             }
+
+        }
+        public void RunOut(Graphics g, Pointer top, int way)
+        {
+            if(this.type != 2)
+                for (int i = 0; i < top.sector.GetLength(0); i += 3)
+                {
+                            g.DrawImage(Properties.Resources.rail, top.sector[i, way * 2 + 3]);
+                        
+                        if (way != 0) Platform.AddPlatform(g, top.sector[0, 6 + (way - 1) / 2 * 4], top.sector.GetLength(0)*50);
+                        
+                }
+                else
+                {  
+                    for (int i = 0; i < top.sector.GetLength(0); i += 3)
+                    {
+                        g.DrawImage(Properties.Resources.rail, top.sector[i, way * 2 + 4]);
+                    }
+                    
+                
+                }
 
         }
     }
