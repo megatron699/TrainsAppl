@@ -107,8 +107,26 @@ namespace TrainsAppl.Topology
 
         public void RunIn(Graphics g, Pointer top, int way)
         {
-            if (this.GetType() == 1)
+            switch (this.GetType())
             {
+                case 0:
+                    for (int i = 0; i < this.GetCount(); i++) // первый пассажирский путь
+                    {
+                        try
+                        {
+                            g.DrawImage(this.GetVagon(), top.sector[i * 2, way * 2 + 1]);
+                        }
+                        catch { }
+                    }
+                    try
+                    {
+                        g.DrawImage(this.GetLoco(), top.sector[count * 2, way * 2 + 1]);
+                    }
+                    catch { }
+                    break;
+
+                case 1:
+            
                 g.DrawImage(this.GetRLoco(), top.sector[0, way * 2 + 1]);
                 for (int i = 1; i < this.GetCount(); i++) // первый пассажирский путь
                 {
@@ -123,24 +141,24 @@ namespace TrainsAppl.Topology
                     g.DrawImage(this.GetLoco(), top.sector[count * 3, way * 2 + 1]);
                 }
                 catch { }
-            }
+                    break;
+                case 2:
 
-            else
-            {
+            
                 for (int i = 0; i < this.GetCount(); i++) // первый пассажирский путь
                 {
                     try
                     {
-                        g.DrawImage(this.GetVagon(), top.sector[i * 2, way * 2 + 1]);
+                        g.DrawImage(this.GetVagon(), top.sector[i * 2, way * 2 + 2]);
                     }
                     catch { }
                 }
                 try
                 {
-                    g.DrawImage(this.GetLoco(), top.sector[count * 2, way * 2 + 1]);
+                    g.DrawImage(this.GetLoco(), top.sector[count * 2, way * 2 + 2]);
                 }
                 catch { }
-                
+                    break;
             }
 
         }
@@ -149,16 +167,16 @@ namespace TrainsAppl.Topology
             if(this.type != 2)
                 for (int i = 0; i < top.sector.GetLength(0); i += 3)
                 {
-                            g.DrawImage(Properties.Resources.rail, top.sector[i, way * 2 + 3]);
+                            g.DrawImage(Properties.Resources.railAway, top.sector[i, (way-1) * 2 + 3]);
                         
-                        if (way != 0) Platform.AddPlatform(g, top.sector[0, 6 + (way - 1) / 2 * 4], top.sector.GetLength(0)*50);
-                        
+                        if (way != 1) Platform.AddPlatform(g, top.sector[0, 6 + (way - 1) / 2 * 4], top.sector.GetLength(0)*50);
+                   
                 }
                 else
                 {  
                     for (int i = 0; i < top.sector.GetLength(0); i += 3)
                     {
-                        g.DrawImage(Properties.Resources.rail, top.sector[i, way * 2 + 4]);
+                        g.DrawImage(Properties.Resources.railAway, top.sector[i, (way-1) * 2 + 4]);
                     }
                     
                 

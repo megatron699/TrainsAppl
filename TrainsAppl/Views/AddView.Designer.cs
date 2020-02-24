@@ -55,64 +55,72 @@
             // labelTrainNum
             // 
             this.labelTrainNum.AutoSize = true;
-            this.labelTrainNum.Location = new System.Drawing.Point(29, 22);
+            this.labelTrainNum.Location = new System.Drawing.Point(22, 18);
+            this.labelTrainNum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTrainNum.Name = "labelTrainNum";
-            this.labelTrainNum.Size = new System.Drawing.Size(104, 17);
+            this.labelTrainNum.Size = new System.Drawing.Size(82, 13);
             this.labelTrainNum.TabIndex = 0;
             this.labelTrainNum.Text = "Номер Поезда";
             // 
             // labelTrainType
             // 
             this.labelTrainType.AutoSize = true;
-            this.labelTrainType.Location = new System.Drawing.Point(29, 72);
+            this.labelTrainType.Location = new System.Drawing.Point(22, 58);
+            this.labelTrainType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTrainType.Name = "labelTrainType";
-            this.labelTrainType.Size = new System.Drawing.Size(84, 17);
+            this.labelTrainType.Size = new System.Drawing.Size(65, 13);
             this.labelTrainType.TabIndex = 2;
             this.labelTrainType.Text = "Тип поезда";
             // 
             // labelDepTime
             // 
             this.labelDepTime.AutoSize = true;
-            this.labelDepTime.Location = new System.Drawing.Point(29, 270);
+            this.labelDepTime.Location = new System.Drawing.Point(22, 219);
+            this.labelDepTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelDepTime.Name = "labelDepTime";
-            this.labelDepTime.Size = new System.Drawing.Size(140, 17);
+            this.labelDepTime.Size = new System.Drawing.Size(108, 13);
             this.labelDepTime.TabIndex = 4;
             this.labelDepTime.Text = "Время отправления";
             // 
             // labelDestination
             // 
             this.labelDestination.AutoSize = true;
-            this.labelDestination.Location = new System.Drawing.Point(29, 120);
+            this.labelDestination.Location = new System.Drawing.Point(22, 98);
+            this.labelDestination.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelDestination.Name = "labelDestination";
-            this.labelDestination.Size = new System.Drawing.Size(67, 17);
+            this.labelDestination.Size = new System.Drawing.Size(51, 13);
             this.labelDestination.TabIndex = 5;
             this.labelDestination.Text = "Отбытие";
             // 
             // labelArrTime
             // 
             this.labelArrTime.AutoSize = true;
-            this.labelArrTime.Location = new System.Drawing.Point(29, 220);
+            this.labelArrTime.Location = new System.Drawing.Point(22, 179);
+            this.labelArrTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelArrTime.Name = "labelArrTime";
-            this.labelArrTime.Size = new System.Drawing.Size(119, 17);
+            this.labelArrTime.Size = new System.Drawing.Size(92, 13);
             this.labelArrTime.TabIndex = 6;
             this.labelArrTime.Text = "Время прибытия";
             // 
             // labelCount
             // 
             this.labelCount.AutoSize = true;
-            this.labelCount.Location = new System.Drawing.Point(29, 321);
+            this.labelCount.Location = new System.Drawing.Point(22, 261);
+            this.labelCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelCount.Name = "labelCount";
-            this.labelCount.Size = new System.Drawing.Size(108, 17);
+            this.labelCount.Size = new System.Drawing.Size(85, 13);
             this.labelCount.TabIndex = 7;
             this.labelCount.Text = "Кол-во вагонов";
             // 
             // trainNumBox
             // 
+            this.trainNumBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.trainNumBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.trainNumBox.FormattingEnabled = true;
-            this.trainNumBox.Location = new System.Drawing.Point(33, 41);
-            this.trainNumBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.trainNumBox.Location = new System.Drawing.Point(25, 33);
+            this.trainNumBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.trainNumBox.Name = "trainNumBox";
-            this.trainNumBox.Size = new System.Drawing.Size(179, 24);
+            this.trainNumBox.Size = new System.Drawing.Size(135, 21);
             this.trainNumBox.TabIndex = 0;
             this.trainNumBox.SelectedIndexChanged += new System.EventHandler(this.trainNumBox_SelectedIndexChanged);
             // 
@@ -123,10 +131,10 @@
             "Пассажирский",
             "Товарный",
             "Электропоезд"});
-            this.trainTypeBox.Location = new System.Drawing.Point(33, 91);
-            this.trainTypeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.trainTypeBox.Location = new System.Drawing.Point(25, 74);
+            this.trainTypeBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.trainTypeBox.Name = "trainTypeBox";
-            this.trainTypeBox.Size = new System.Drawing.Size(179, 24);
+            this.trainTypeBox.Size = new System.Drawing.Size(135, 21);
             this.trainTypeBox.TabIndex = 2;
             // 
             // departueBox
@@ -780,17 +788,17 @@
             "Якутск",
             "Ялта",
             "Ярославль"});
-            this.departueBox.Location = new System.Drawing.Point(33, 141);
-            this.departueBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.departueBox.Location = new System.Drawing.Point(25, 115);
+            this.departueBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.departueBox.Name = "departueBox";
-            this.departueBox.Size = new System.Drawing.Size(179, 24);
+            this.departueBox.Size = new System.Drawing.Size(135, 21);
             this.departueBox.TabIndex = 3;
             this.departueBox.SelectedIndexChanged += new System.EventHandler(this.departueBox_SelectedIndexChanged);
             // 
             // countUpDown
             // 
-            this.countUpDown.Location = new System.Drawing.Point(33, 341);
-            this.countUpDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.countUpDown.Location = new System.Drawing.Point(25, 277);
+            this.countUpDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.countUpDown.Maximum = new decimal(new int[] {
             20,
             0,
@@ -802,7 +810,7 @@
             0,
             0});
             this.countUpDown.Name = "countUpDown";
-            this.countUpDown.Size = new System.Drawing.Size(179, 22);
+            this.countUpDown.Size = new System.Drawing.Size(134, 20);
             this.countUpDown.TabIndex = 7;
             this.countUpDown.Value = new decimal(new int[] {
             1,
@@ -812,10 +820,10 @@
             // 
             // acceptButton
             // 
-            this.acceptButton.Location = new System.Drawing.Point(33, 369);
-            this.acceptButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.acceptButton.Location = new System.Drawing.Point(25, 300);
+            this.acceptButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.acceptButton.Name = "acceptButton";
-            this.acceptButton.Size = new System.Drawing.Size(180, 46);
+            this.acceptButton.Size = new System.Drawing.Size(135, 37);
             this.acceptButton.TabIndex = 10;
             this.acceptButton.Text = "Принять";
             this.acceptButton.UseVisualStyleBackColor = true;
@@ -823,10 +831,10 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(33, 420);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cancelButton.Location = new System.Drawing.Point(25, 341);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(179, 46);
+            this.cancelButton.Size = new System.Drawing.Size(134, 37);
             this.cancelButton.TabIndex = 11;
             this.cancelButton.Text = "Отмена";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -836,9 +844,10 @@
             // 
             this.arrTimePicker.CustomFormat = "HH:mm";
             this.arrTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.arrTimePicker.Location = new System.Drawing.Point(33, 241);
+            this.arrTimePicker.Location = new System.Drawing.Point(25, 196);
+            this.arrTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.arrTimePicker.Name = "arrTimePicker";
-            this.arrTimePicker.Size = new System.Drawing.Size(179, 22);
+            this.arrTimePicker.Size = new System.Drawing.Size(135, 20);
             this.arrTimePicker.TabIndex = 5;
             this.arrTimePicker.Value = new System.DateTime(2020, 2, 19, 0, 0, 0, 0);
             this.arrTimePicker.ValueChanged += new System.EventHandler(this.arrTimePicker_ValueChanged);
@@ -847,9 +856,10 @@
             // 
             this.depTimePicker.CustomFormat = "HH:mm";
             this.depTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.depTimePicker.Location = new System.Drawing.Point(32, 291);
+            this.depTimePicker.Location = new System.Drawing.Point(24, 236);
+            this.depTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.depTimePicker.Name = "depTimePicker";
-            this.depTimePicker.Size = new System.Drawing.Size(180, 22);
+            this.depTimePicker.Size = new System.Drawing.Size(136, 20);
             this.depTimePicker.TabIndex = 6;
             this.depTimePicker.Value = new System.DateTime(2020, 2, 19, 0, 0, 0, 0);
             // 
@@ -1503,18 +1513,19 @@
             "Якутск",
             "Ялта",
             "Ярославль"});
-            this.destinationBox.Location = new System.Drawing.Point(33, 191);
-            this.destinationBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.destinationBox.Location = new System.Drawing.Point(25, 155);
+            this.destinationBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.destinationBox.Name = "destinationBox";
-            this.destinationBox.Size = new System.Drawing.Size(179, 24);
+            this.destinationBox.Size = new System.Drawing.Size(135, 21);
             this.destinationBox.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 170);
+            this.label1.Location = new System.Drawing.Point(22, 138);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 17);
+            this.label1.Size = new System.Drawing.Size(68, 13);
             this.label1.TabIndex = 13;
             this.label1.Text = "Назначение";
             // 
@@ -1528,9 +1539,9 @@
             // 
             // AddView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(296, 496);
+            this.ClientSize = new System.Drawing.Size(222, 403);
             this.Controls.Add(this.destinationBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.depTimePicker);
@@ -1548,7 +1559,7 @@
             this.Controls.Add(this.labelTrainType);
             this.Controls.Add(this.labelTrainNum);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "AddView";
             this.Text = "TrainsAppl";

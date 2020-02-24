@@ -21,6 +21,7 @@ namespace TrainsAppl.Views
         private readonly TrainDBContext _context = new TrainDBContext();
         public bool isPaused;
         public bool isRunned;
+        public bool isChanged;
         public DateTime currentTime;
         private static int modelTime;
         public static TimeSpan[] minute = new TimeSpan[3];
@@ -65,6 +66,7 @@ namespace TrainsAppl.Views
             types[1] = "Электропоезд";
             types[2] = "Товарный";
             provider = CultureInfo.InvariantCulture;
+            timer1.Tick += new EventHandler(timer1_Tick);
         }
 
 
@@ -140,7 +142,7 @@ namespace TrainsAppl.Views
         {
             if (tabControl.SelectedIndex.Equals(0))
             {
-                if (PathT == "")
+                if (PathT == null)
                     СохранитьКакToolStripMenuItem_Click(sender, e);
                 else
                 {
@@ -159,7 +161,7 @@ namespace TrainsAppl.Views
             }
             else
             {
-                if (PathR == "")
+                if (PathR == null)
                        СохранитьКакToolStripMenuItem_Click(sender, e);
                     else
                     {
@@ -427,14 +429,14 @@ namespace TrainsAppl.Views
                 Topology = new Pointer();
                 G.Clear(Color.White);
                 Topology.DoMap(mapBox.Width, mapBox.Height);
-                for (int i = 0; i < mapBox.Width + 1; i += 50) //Координатная сетка: вертикальные
-                {
-                    G.DrawLine(item.GrayPen(), i, 0, i, mapBox.Height);
-                }
-                for (int i = 0; i < mapBox.Height + 1; i += 50) //Координатная сетка: горизонтальные
-                {
-                    G.DrawLine(item.GrayPen(), 0, i, mapBox.Width, i);
-                }
+                //for (int i = 0; i < mapBox.Width + 1; i += 50) //Координатная сетка: вертикальные
+                //{
+                //    G.DrawLine(item.GrayPen(), i, 0, i, mapBox.Height);
+                //}
+                //for (int i = 0; i < mapBox.Height + 1; i += 50) //Координатная сетка: горизонтальные
+                //{
+                //    G.DrawLine(item.GrayPen(), 0, i, mapBox.Width, i);
+                //}
 
 
                 for (int i = 0; i < Topology.sector.GetLength(0); i += 3) // первый пассажирский путь
@@ -452,15 +454,17 @@ namespace TrainsAppl.Views
             }
             buttonEdit.Enabled = true;
             
-            //       DefaultImage = mapBox.Image;
-            //       DefaultImage.Save("C:\\Users\\Maximus\\Source\\Repos\\TrainsAppl\\TrainsAppl\\Resources\\DefaultPicture.png", System.Drawing.Imaging.ImageFormat.Png);
+                   //DefaultImage = mapBox.Image;
+                   //DefaultImage.Save("C:\\Users\\Maximus\\Source\\Repos\\TrainsAppl\\TrainsAppl\\Resources\\DefaultPicture.png", System.Drawing.Imaging.ImageFormat.Png);
         }
 
         private void ButtonPlay_Click(object sender, EventArgs e)
         {
             if (isPaused == false)
             {
+                modelTime = 0;
                 DateTime dt;
+                isChanged = false;
                 orderArr = new int[TimeTableGrid.Rows.Count];
                 orderDep = new int[TimeTableGrid.Rows.Count];
                 for (int i = 0; i < TimeTableGrid.Rows.Count; i++)
@@ -476,7 +480,7 @@ namespace TrainsAppl.Views
 
                 // modelTime = TimeSpan.Parse("0");
                 Tick = 0;
-                timer1.Tick += new EventHandler(timer1_Tick);
+                //timer1.Tick += new EventHandler(timer1_Tick);
             }
             isPaused = false;
             isRunned = true;
@@ -499,9 +503,25 @@ namespace TrainsAppl.Views
         private void ButtonStop_Click(object sender, EventArgs e)
         {
             timer1.Stop();
-            timer1.Enabled = false;
-            isRunned = false;
+            if (timer1.Enabled == true)
+            {
+                
+                timer1.Enabled = false;
+                var seekRasp = _context.Timetables.Where(time => time.Set == PathR);
+                foreach (Timetable ras in seekRasp)
+                {
+                    Records.AddLast(ras);
+
+                }
+                UpdateTable(Records);
+                TimeTableGrid.Refresh();
+            }
+                isRunned = false;
+            isPaused = false;
             currentTime = new DateTime();
+            labelTime.Text = "00:00";
+            
+
         }
         public static void time(bool isRunned, bool isPaused)
         {
@@ -542,37 +562,45 @@ namespace TrainsAppl.Views
                 {
                     if (TimeTableGrid.Rows[i].Cells[1].Value.ToString() != "Товарный")
                     {
-                        TimeTableGrid.Rows[i].Cells[6].Value = Array.IndexOf(wayP, false)+1; //Если есть свободный путь - назначить путь
-                        if (TimeTableGrid.Rows[i].Cells[6].Value.ToString() == null) // если путь не назначен, отсрочить прибытие
+                        
+                        if (Array.IndexOf(wayP, false) == -1) // Если нет свободного пути - отсрочить прибытие
                         {
                             orderArr[i] += 15;
                             orderDep[i] += 15;
                             dt = DateTime.ParseExact(TimeTableGrid.Rows[i].Cells[4].Value.ToString(), "HH:mm:ss", provider);
-                            dt.AddMinutes(15); TimeTableGrid.Rows[i].Cells[4].Value = dt;
+                            dt.AddMinutes(15); TimeTableGrid.Rows[i].Cells[4].Value = dt.TimeOfDay;
                             dt = DateTime.ParseExact(TimeTableGrid.Rows[i].Cells[5].Value.ToString(), "HH:mm:ss", provider);
-                            dt.AddMinutes(15); TimeTableGrid.Rows[i].Cells[5].Value = dt;
+                            dt.AddMinutes(15); TimeTableGrid.Rows[i].Cells[5].Value = dt.TimeOfDay;
 
                         }
-                        else wayP[Array.IndexOf(wayP, false)] = true;
+                        else
+                        {
+                            TimeTableGrid.Rows[i].Cells[6].Value = Array.IndexOf(wayP, false) + 1;//Если есть свободный путь - назначить путь
+                            wayP[Array.IndexOf(wayP, false)] = true;
+                        } 
                     }
                     else
                     {
-                        TimeTableGrid.Rows[i].Cells[6].Value = Array.IndexOf(wayH, false)+wayP.Length; //Если есть свободный путь - назначить путь
-                        if (TimeTableGrid.Rows[i].Cells[6].Value.ToString() == null) // если путь не назначен, отсрочить прибытие
+
+                        if (Array.IndexOf(wayH, false) == -1) // Если нет свободного пути - отсрочить прибытие
                         {
                             orderArr[i] += 15;
                             orderDep[i] += 15;
                             dt = DateTime.ParseExact(TimeTableGrid.Rows[i].Cells[4].Value.ToString(), "HH:mm:ss", provider);
-                            dt.AddMinutes(15); TimeTableGrid.Rows[i].Cells[4].Value = dt;
+                            dt.AddMinutes(15); TimeTableGrid.Rows[i].Cells[4].Value = dt.TimeOfDay;
                             dt = DateTime.ParseExact(TimeTableGrid.Rows[i].Cells[5].Value.ToString(), "HH:mm:ss", provider);
-                            dt.AddMinutes(15); TimeTableGrid.Rows[i].Cells[5].Value = dt;
+                            dt.AddMinutes(15); TimeTableGrid.Rows[i].Cells[5].Value = dt.TimeOfDay;
 
                         }
-                        else wayH[Array.IndexOf(wayH, false)] = true;
-                    }
-
+                        else
+                        {
+                            TimeTableGrid.Rows[i].Cells[6].Value = Array.IndexOf(wayH, false) + wayP.Length + 1; //Если есть свободный путь - назначить путь
+                            wayH[Array.IndexOf(wayH, false)] = true;
+                        }
+                        }
+                    TimeTableGrid.Refresh();
                 }
-                else if ((orderArr[i] - modelTime < 1) && (TimeTableGrid.Rows[i].Cells[6].Value != null))//Если прибывает и путь назначен
+                else if ((orderArr[i] - modelTime == 0) && (TimeTableGrid.Rows[i].Cells[6].Value != null))//Если прибывает и путь назначен
                 {
                     int a = int.Parse(TimeTableGrid.Rows[i].Cells[0].Value.ToString());
                     string s1 = TimeTableGrid.Rows[i].Cells[2].Value.ToString();
@@ -588,7 +616,7 @@ namespace TrainsAppl.Views
                 }
 
 
-                if (orderDep[i] <= modelTime)//Если пора убывать
+                if (orderDep[i] == modelTime)//Если пора убывать
                 {
                     int a = Convert.ToInt32(TimeTableGrid.Rows[i].Cells[0].Value.ToString());
                     string s1 = TimeTableGrid.Rows[i].Cells[2].Value.ToString();
@@ -597,19 +625,24 @@ namespace TrainsAppl.Views
                     Thomas Tr = new Thomas(tom.WagonCount, Array.IndexOf(types, TimeTableGrid.Rows[i].Cells[1].Value.ToString()));
                     using (G = Graphics.FromImage(mapBox.Image))
                     {
-                        Tr.RunOut(G, Topology, (int)TimeTableGrid.Rows[i].Cells[6].Value - 1);
+                        Tr.RunOut(G, Topology, (int)TimeTableGrid.Rows[i].Cells[6].Value);
                     }
                     if (TimeTableGrid.Rows[i].Cells[1].Value.ToString() != "Товарный")
                         wayP[int.Parse(TimeTableGrid.Rows[i].Cells[6].Value.ToString())-1] = false;
-                    else wayH[int.Parse(TimeTableGrid.Rows[i].Cells[6].Value.ToString())-wayP.Length] = false;
+                    else wayH[int.Parse(TimeTableGrid.Rows[i].Cells[6].Value.ToString())-wayP.Length -1] = false;
                     TimeTableGrid.Rows.RemoveAt(i);
-
+                    TimeTableGrid.Refresh();
+                    orderDep[i]=2000;
+                    mapBox.Invalidate();
 
                 }
-                
-                TimeTableGrid.Refresh();//
-           //     timer1.Start();
-                    //  orderDep[i];
+                //if (isChanged == true)
+                //{
+                //    TimeTableGrid.Refresh();
+                //    isChanged = false;
+                //}//
+                                        //     timer1.Start();
+                                        //  orderDep[i];
             }
             //Records;
             //dateLabel.Text = modelTime.Date.ToString();
