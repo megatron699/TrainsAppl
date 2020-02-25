@@ -160,6 +160,7 @@ namespace TrainsAppl.Topology
                 catch { }
                     break;
             }
+            g.DrawImage(Properties.Resources.station, top.sector[0, 0]);
 
         }
         public void RunOut(Graphics g, Pointer top, int way)
@@ -169,7 +170,7 @@ namespace TrainsAppl.Topology
                 {
                             g.DrawImage(Properties.Resources.railAway, top.sector[i, (way-1) * 2 + 3]);
                         
-                        if (way != 1) Platform.AddPlatform(g, top.sector[0, 6 + (way - 1) / 2 * 4], top.sector.GetLength(0)*50);
+                        if (way != 1) Platform.AddPlatform(g, top.sector[0, 6 + (way - 2) / 2 * 4], top.sector.GetLength(0)*50);
                    
                 }
                 else
