@@ -31,6 +31,8 @@ namespace TrainsAppl.Views
         public static bool[] wayP;
         public static bool[] wayH;
         public static CultureInfo provider;
+        public static Item item = new Item();
+        
 
 
 
@@ -270,7 +272,7 @@ namespace TrainsAppl.Views
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            AddView addView = new AddView(-1, Records);
+            AddView addView = new AddView(-1, Records,PathR);
             addView.ShowDialog();
             UpdateTable(Records);
         }
@@ -284,10 +286,13 @@ namespace TrainsAppl.Views
                     throw new Exception("Выберите один пункт расписания");
                 else
                 {
-
-                    AddView addView = new AddView(Convert.ToInt32(TimeTableGrid[0, TimeTableGrid.CurrentRow.Index]), Records);
+                    int b = int.Parse(TimeTableGrid.SelectedCells[0].Value.ToString());
+                    
+                    var q = _context.Timetables.FirstOrDefault(c => c.TrainNumber == b && c.Set == PathR);
+                    AddView addView = new AddView(q.Id, Records,PathR);
 
                     addView.ShowDialog();
+                    UpdateTable(Records);
                 }
             }
             catch (Exception ex)
@@ -404,17 +409,20 @@ namespace TrainsAppl.Views
                 }
             }
             TimeTableGrid.Sort(TimeTableGrid.Columns[4], 0);
+            Records = item.Sort(Records);
+
         }
 
         private void расписаниеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Records = new LinkedList<Timetable>();
-            AddView addView = new AddView(-1, Records);
+            AddView addView = new AddView(-1, Records,PathR);
             addView.ShowDialog();
             UpdateTable(Records);
             buttonChange.Enabled = true;
             buttonAdd.Enabled = true;
             buttonDelete.Enabled = true;
+            PathR = null;
         }
 
         private void ТопологиюToolStripMenuItem_Click(object sender, EventArgs e)

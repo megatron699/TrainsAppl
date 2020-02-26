@@ -20,6 +20,8 @@ namespace TrainsAppl.DAL
         //    //base.OnModelCreating(modelBuilder);
         //}
 
+
+
         public DbSet<UserDB> Users { get; set; }
         public DbSet<Station> Stations { get; set; }
         public DbSet<Timetable> Timetables { get; set; }

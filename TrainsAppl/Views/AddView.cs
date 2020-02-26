@@ -15,14 +15,17 @@ namespace TrainsAppl.Views
     public partial class AddView : Form
     {
         LinkedList<Timetable> records;
-        
+        string set;
+        int TtId;
+        Timetable location;
 
         
         //  MainView view;
         private readonly TrainDBContext _context = new TrainDBContext();
         DateTime defTime;
-        public AddView(int timeTableId, LinkedList<Timetable> records)
+        public AddView(int timeTableId, LinkedList<Timetable> records, string set)
         {
+            this.set = set;
             Int32 train = new Int32();
             this.records = records;
             
@@ -43,18 +46,20 @@ namespace TrainsAppl.Views
                 train = 901 + i * 7;
                 trainNumBox.Items.Add(train);
             }
-            
 
 
+            this.TtId = timeTableId;
             if (timeTableId > -1)
             {
                 var timetable = _context.Timetables.FirstOrDefault(time => time.Id == timeTableId);
                 trainNumBox.Text = timetable.TrainNumber.ToString();
                 trainTypeBox.Text = timetable.Type;
-                departueBox.Text = timetable.Destination;
-                arrTimePicker.Value.AddMinutes(timetable.ArrivalTime.TotalMinutes); 
-                depTimePicker.Value.AddMinutes(timetable.DepartureTime.TotalMinutes);
+                departueBox.Text = timetable.Departue;
+                destinationBox.Text = timetable.Destination;
+                arrTimePicker.Value = arrTimePicker.Value.AddMinutes(timetable.ArrivalTime.TotalMinutes); 
+                depTimePicker.Value = depTimePicker.Value.AddMinutes(timetable.DepartureTime.TotalMinutes - timetable.ArrivalTime.TotalMinutes - 30);
                 countUpDown.Value = timetable.WagonCount;
+                
             }
         }
 
@@ -67,39 +72,82 @@ namespace TrainsAppl.Views
         {
             try { int.Parse(trainNumBox.Text); }
             catch { MessageBox.Show("Недопустимое значение - номер поезда", "Ошибка работы с расписанием:"); }
-            if ((trainTypeBox.Text != "Пассажирский") && (trainTypeBox.Text != "Электропоезд") && (trainTypeBox.Text != "Товарный")) { MessageBox.Show("Недопустимое значение - тип поезда", "Ошибка работы с расписанием:"); }
+            int num = int.Parse(trainNumBox.Text);
+            var trainInDb = _context.Timetables.FirstOrDefault(c => c.TrainNumber == num && c.Set == set);
+            if ((trainInDb != null) && (trainInDb.Id != TtId)) MessageBox.Show("Поезд с таким номером уже существует в расписании", "Ошибка работы с расписанием:");
             else
             {
-                TimeSpan span = depTimePicker.Value - arrTimePicker.Value;
-                double relative = span.TotalMinutes;
-                if (Math.Abs(relative) < 30) { MessageBox.Show("Недопустимое значение - время стоянки должно быть как минимум 30 минут ", "Ошибка работы с расписанием:"); }
+                if ((trainTypeBox.Text != "Пассажирский") && (trainTypeBox.Text != "Электропоезд") && (trainTypeBox.Text != "Товарный")) { MessageBox.Show("Недопустимое значение - тип поезда", "Ошибка работы с расписанием:"); }
                 else
                 {
-                    Timetable timetable = new Timetable
+                    if ((!departueBox.AutoCompleteCustomSource.Contains(departueBox.Text)) || (!destinationBox.AutoCompleteCustomSource.Contains(destinationBox.Text)))
                     {
-                        TrainNumber = int.Parse(trainNumBox.Text),
-                        Type = trainTypeBox.Text,
-                        Departue = departueBox.Text,
-                        Destination = destinationBox.Text,
-                        ArrivalTime = arrTimePicker.Value - arrTimePicker.Value.Date,
-                        DepartureTime = depTimePicker.Value - depTimePicker.Value.Date,
-                        WagonCount = int.Parse(countUpDown.Text)
-                    };
-                    _context.Timetables.Add(timetable);
-                    _context.SaveChanges();
-                
-                try
-                {
-                    records.AddLast(timetable);
+                        MessageBox.Show("Такого города не существует в РФ", "Ошибка работы с расписанием:");
+                    }
+                    else
+                    {
+                        TimeSpan span = depTimePicker.Value - arrTimePicker.Value;
+                        double relative = span.TotalMinutes;
+                        if (Math.Abs(relative) < 30) { MessageBox.Show("Недопустимое значение - время стоянки должно быть как минимум 30 минут ", "Ошибка работы с расписанием:"); }
+                        else
+                        { if (TtId == -1)
+                            {
+
+
+                                Timetable timetable = new Timetable
+                                {
+                                    TrainNumber = int.Parse(trainNumBox.Text),
+                                    Type = trainTypeBox.Text,
+                                    Departue = departueBox.Text,
+                                    Destination = destinationBox.Text,
+                                    ArrivalTime = arrTimePicker.Value - arrTimePicker.Value.Date,
+                                    DepartureTime = depTimePicker.Value - depTimePicker.Value.Date,
+                                    WagonCount = int.Parse(countUpDown.Text),
+                                    Set = set
+                                };
+                                _context.Timetables.Add(timetable);
+                                _context.SaveChanges();
+                                try
+                                {
+                                    records.AddLast(timetable);
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+                                }
+                            }
+                            else
+                            {
+                                location = records.FirstOrDefault(c => c.Id == TtId);
+                                var timetable = _context.Timetables.FirstOrDefault(c => c.Id == TtId);
+                                _context.Timetables.Remove(timetable);
+                                _context.SaveChanges();
+                                timetable.TrainNumber = int.Parse(trainNumBox.Text);
+                                timetable.Type = trainTypeBox.Text;
+                                timetable.Departue = departueBox.Text;
+                                timetable.Destination = destinationBox.Text;
+                                timetable.ArrivalTime = arrTimePicker.Value - arrTimePicker.Value.Date;
+                                timetable.DepartureTime = depTimePicker.Value - depTimePicker.Value.Date;
+                                timetable.WagonCount = int.Parse(countUpDown.Text);
+                       
+                                _context.Timetables.Add(timetable);
+                                _context.SaveChanges();
+                                records.Remove(location);
+                                try
+                                {
+                                    records.AddLast(timetable);
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+                                }
+                            }
+                            Close();
+                        }
+                    }
+
+                    // view.UpdateTable(records);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                    Close();
-                }
-                
-                // view.UpdateTable(records);
             }
         }
 
@@ -114,16 +162,16 @@ namespace TrainsAppl.Views
 
         private void arrTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            if (depTimePicker.Value == defTime)
-            {
+            
                 depTimePicker.Value = arrTimePicker.Value;
-                depTimePicker.Value.AddMinutes(30); 
-            }
+                depTimePicker.Value = depTimePicker.Value.AddMinutes(30);
+                
+            
         }
 
         private void departueBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

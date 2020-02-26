@@ -4,10 +4,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrainsAppl.Models.DB;
 
 namespace TrainsAppl.Topology
 {
-    class Item
+    public class Item
     {
         Pen whitePen;
         Pen greenPen;
@@ -55,6 +56,13 @@ namespace TrainsAppl.Topology
         public SolidBrush DGraybrush()
         {
             return dGraybrush;
+        }
+
+        public LinkedList<Timetable> Sort(LinkedList<Timetable> a)
+
+        {
+            LinkedList<Timetable> r = new LinkedList<Timetable>(a.OrderBy(val => val.ArrivalTime));
+            return r;
         }
 
     }
