@@ -25,9 +25,9 @@ namespace TrainsAppl
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginView());
+            //Application.Run(new LoginView());
 
-           // Application.Run(new MainView(true));
+            Application.Run(new MainView(true));
         }
     }
 }
