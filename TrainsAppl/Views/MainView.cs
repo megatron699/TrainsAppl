@@ -489,10 +489,13 @@ namespace TrainsAppl.Views
             AddView addView = new AddView(-1, Records,PathR);
             addView.ShowDialog();
             UpdateTable(Records);
-            buttonChange.Enabled = true;
-            buttonAdd.Enabled = true;
-            buttonDelete.Enabled = true;
-            PathR = null;
+            if (TimeTableGrid.Rows.Count != 0)
+            {
+                buttonChange.Enabled = true;
+                buttonAdd.Enabled = true;
+                buttonDelete.Enabled = true;
+                PathR = null;
+            }
         }
 
         private void ТопологиюToolStripMenuItem_Click(object sender, EventArgs e)
