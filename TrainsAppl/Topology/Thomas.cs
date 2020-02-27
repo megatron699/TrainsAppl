@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace TrainsAppl.Topology
 {
     class Thomas
@@ -15,11 +16,13 @@ namespace TrainsAppl.Topology
         private Image rvagon;
         private int count;
         private int type;
+        private Item item;
 
         public Thomas(int count, int type)
         {
             this.count = count;
             this.type = type;
+            this.item = new Item();
 
             switch (type)
             {
@@ -160,7 +163,7 @@ namespace TrainsAppl.Topology
                 catch { }
                     break;
             }
-            g.DrawImage(Properties.Resources.station, top.sector[0, 0]);
+            g.DrawImage(Properties.Resources.platform, top.sector[0, 0]);
 
         }
         public void RunOut(Graphics g, Pointer top, int way)
@@ -171,7 +174,11 @@ namespace TrainsAppl.Topology
                             g.DrawImage(Properties.Resources.railAway, top.sector[i, (way-1) * 2 + 3]);
                         
                         if (way != 1) Platform.AddPlatform(g, top.sector[0, 6 + (way - 2) / 2 * 4], top.sector.GetLength(0)*50);
-                   
+                        else for (int j = 1; j < top.sector.GetLength(0); j += 4) //Разметка главной платформы
+                        {
+                            g.DrawLine(item.GreenPen(), 150, j*50, 150, j*50 + 100);
+                        }
+
                 }
                 else
                 {  
@@ -182,6 +189,7 @@ namespace TrainsAppl.Topology
                     
                 
                 }
+            g.DrawImage(Properties.Resources.platform, top.sector[0, 0]);
 
         }
     }

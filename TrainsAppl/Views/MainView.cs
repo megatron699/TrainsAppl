@@ -54,9 +54,11 @@ namespace TrainsAppl.Views
             {
                 buttonEdit.Enabled = false;
                 buttonEdit.Hide();
-                создатьToolStripMenuItem.HideDropDown();
-                сохранитьToolStripMenuItem.HideDropDown();
-                сохранитьКакToolStripMenuItem.HideDropDown();
+                создатьToolStripMenuItem.Enabled = false;
+                топологиюToolStripMenuItem.Enabled = false;
+                расписаниеToolStripMenuItem.Enabled = false;
+                сохранитьToolStripMenuItem.Enabled = false;
+                сохранитьКакToolStripMenuItem.Enabled = false;
                 buttonChange.Hide();
                 buttonDelete.Hide();
                 buttonAdd.Hide();
@@ -365,6 +367,8 @@ namespace TrainsAppl.Views
                     }
                     j++;
                 }
+                G.DrawImage(Properties.Resources.platform, Topology.sector[0, 0]);
+                mapBox.Invalidate();
             }
             labelHeavy.Visible = false;
             labelPass.Visible = false;
@@ -454,13 +458,14 @@ namespace TrainsAppl.Views
 
 
                 Platform.MainPlatform(G, Topology.sector[0, 0], mapBox.Height); //Главная платформа
-                G.DrawImage(Properties.Resources.platform, 0, 0, mapBox.Width / 16, mapBox.Height); //Станция
+                G.DrawImage(Properties.Resources.platform, Topology.sector[0, 0]); //Станция
                 for (int i = 50; i < mapBox.Height; i += 200) //Разметка главной платформы
                 {
                     G.DrawLine(item.GreenPen(), 150, i, 150, i + 100);
                 }
             }
             buttonEdit.Enabled = true;
+            PathT = "";
             
                    //DefaultImage = mapBox.Image;
                    //DefaultImage.Save("C:\\Users\\Maximus\\Source\\Repos\\TrainsAppl\\TrainsAppl\\Resources\\DefaultPicture.png", System.Drawing.Imaging.ImageFormat.Png);
@@ -468,15 +473,15 @@ namespace TrainsAppl.Views
 
         private void ButtonPlay_Click(object sender, EventArgs e)
         {
-            //if ((PathR != null) && (PathT != null))
-            //{
+            if (PathT != null)
+            {
                 if (isPaused == false)
                 {
                     modelTime = 0;
                     DateTime dt;
                     isChanged = false;
-                orderArr = new List<int>();
-                orderDep = new List<int>();
+                    orderArr = new List<int>();
+                    orderDep = new List<int>();
                     for (int i = 0; i < TimeTableGrid.Rows.Count; i++)
                     {
                         string s = TimeTableGrid.Rows[i].Cells[4].ToString();
@@ -502,6 +507,8 @@ namespace TrainsAppl.Views
 
                 timer1.Enabled = true;
                 timer1.Start();
+            }
+            
            /* }*/            //    Thread timeThread = new Thread(time);
         }
 
@@ -592,6 +599,7 @@ namespace TrainsAppl.Views
             currentTime = Convert.ToDateTime(labelTime.Text).AddMinutes(1);
             modelTime++;
             labelTime.Text = currentTime.Hour.ToString() + ":" + currentTime.Minute.ToString();
+            
             for (int i = 0; i < TimeTableGrid.Rows.Count; i++)
             {
 
@@ -613,6 +621,7 @@ namespace TrainsAppl.Views
                         else
                         {
                             TimeTableGrid.Rows[i].Cells[6].Value = Array.IndexOf(wayP, false) + 1;//Если есть свободный путь - назначить путь
+                            TimeTableGrid.Rows[i].Cells[7].Value = (Array.IndexOf(wayP, false) + 1) / 2 + 1;
                             wayP[Array.IndexOf(wayP, false)] = true;
                         } 
                     }

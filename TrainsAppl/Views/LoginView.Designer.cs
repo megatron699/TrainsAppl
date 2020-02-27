@@ -43,7 +43,6 @@
             this.LoginBox.Name = "LoginBox";
             this.LoginBox.Size = new System.Drawing.Size(206, 20);
             this.LoginBox.TabIndex = 0;
-            this.LoginBox.Text = "test";
             // 
             // LogLabel
             // 
@@ -79,7 +78,6 @@
             this.PassBox.Name = "PassBox";
             this.PassBox.Size = new System.Drawing.Size(206, 20);
             this.PassBox.TabIndex = 2;
-            this.PassBox.Text = "test123";
             this.PassBox.UseSystemPasswordChar = true;
             // 
             // LoginButton
@@ -114,6 +112,7 @@
             this.Controls.Add(this.PassLabel);
             this.Controls.Add(this.LogLabel);
             this.Controls.Add(this.LoginBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "LoginView";
             this.Text = "Авторизация";
             this.ResumeLayout(false);
