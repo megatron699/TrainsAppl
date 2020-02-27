@@ -9,6 +9,14 @@ namespace TrainsAppl
 {
     static class Program
     {
+        public static LoginView LoginView
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>

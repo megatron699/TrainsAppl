@@ -63,6 +63,14 @@ namespace TrainsAppl.Views
             }
         }
 
+        public Timetable Timetable
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();

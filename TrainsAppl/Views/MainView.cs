@@ -13,6 +13,7 @@ using TrainsAppl.DAL;
 using TrainsAppl.Models.DB;
 using System.Globalization;
 using TrainsAppl.Topology;
+using System.Diagnostics;
 
 namespace TrainsAppl.Views
 {
@@ -47,6 +48,71 @@ namespace TrainsAppl.Views
         public int Tick { get; set; }
         public string TTime { get; set; }
         public Thread Thread { get; set; }
+
+        public LabView LabView
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public DevView DevView
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public AddView AddView
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal Platform Platform
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Pointer Pointer
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal Thomas Thomas
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Station Station
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Timetable Timetable
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public MainView(bool userRole)
         {
             InitializeComponent();
@@ -782,6 +848,13 @@ namespace TrainsAppl.Views
         {
             
             timer1.Interval = 1000 / (int)(Math.Pow(5,TimeMode.Value));
+        }
+
+        private void справкаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory.ToString().Substring(0, AppDomain.CurrentDomain.BaseDirectory.ToString().Length - 10);
+            //MessageBox.Show(path);
+            Process.Start("iexplore.exe", path + @"Resources\поезда\Справка.html");
         }
     }
 }

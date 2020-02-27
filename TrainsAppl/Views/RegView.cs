@@ -13,6 +13,15 @@ namespace TrainsAppl.Views
         {
             InitializeComponent();
         }
+
+        public UserDB UserDB
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         private void LoginButton_Click(object sender, EventArgs e)
         {
            this.Close();

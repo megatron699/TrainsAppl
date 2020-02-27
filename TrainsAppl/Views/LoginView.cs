@@ -20,6 +20,31 @@ namespace TrainsAppl.Views
             //_context.Users.First(c => c.Id == 1);
             InitializeComponent();
         }
+
+        public MainView MainView
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public RegView RegView
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Models.DB.UserDB UserDB
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         private void SignInButton_Click(object sender, EventArgs e)
         {
             this.Hide();

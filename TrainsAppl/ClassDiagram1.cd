@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TrainsAppl.Models.DB.Station" Collapsed="true">
+    <Position X="5" Y="7.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAEAAAAAAAAAEAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DB\Station.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrainsAppl.Models.DB.Timetable" Collapsed="true">
+    <Position X="1.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAABAIAAAAAEAAAAAAAAQAEAQAAAAIAAAQ=</HashCode>
+      <FileName>Models\DB\Timetable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrainsAppl.Models.DB.Train" Collapsed="true">
+    <Position X="15.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAQ=</HashCode>
+      <FileName>Models\DB\Train.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrainsAppl.Models.DB.UserDB" Collapsed="true">
+    <Position X="8.5" Y="4.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAEQAAAAAAgAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DB\UserDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrainsAppl.Program" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABABAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LoginView" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TrainsAppl.Topology.Platform">
+    <Position X="7" Y="7.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>BAAEAAIAAQAAAAAAAY0AIAEBACAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Topology\Platform.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Pointer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TrainsAppl.Topology.Pointer">
+    <Position X="10" Y="7.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Topology\Pointer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrainsAppl.Topology.Thomas">
+    <Position X="12.75" Y="7.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Train" Type="TrainsAppl.Models.DB.Train" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.75" Y="11.555" />
+        <Point X="13.75" Y="11.781" />
+        <Point X="15.5" Y="11.781" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQkAAIAAAEAEAAABRQAAAEAEARBAAcQAAAAQBAEAEA=</HashCode>
+      <FileName>Topology\Thomas.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Train" />
+      <Property Name="Pointer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TrainsAppl.Views.AddView">
+    <Position X="1" Y="5.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Timetable" Type="TrainsAppl.Models.DB.Timetable" FixedFromPoint="true">
+      <Path>
+        <Point X="1.625" Y="8.088" />
+        <Point X="1.625" Y="9.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AABAAAwIgCQABBIAAgSAIEQCDCkDAAAFIAQQACAgAAA=</HashCode>
+      <FileName>Views\AddView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Timetable" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TrainsAppl.Views.LoginView">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="MainView" Type="TrainsAppl.Views.MainView" FixedFromPoint="true">
+      <Path>
+        <Point X="7.25" Y="3.761" />
+        <Point X="7.25" Y="5.25" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="UserDB" Type="TrainsAppl.Models.DB.UserDB" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.875" Y="3.761" />
+        <Point X="7.875" Y="4.019" />
+        <Point X="8.688" Y="4.019" />
+        <Point X="8.688" Y="4.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>CAAJAAAAACgQBBAAAACAIAACACgQAAAAEACAAAAAAAA=</HashCode>
+      <FileName>Views\LoginView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MainView" />
+      <Property Name="RegView" />
+      <Property Name="UserDB" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TrainsAppl.Views.MainView" Collapsed="true">
+    <Position X="6.75" Y="5.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Platform" Type="TrainsAppl.Topology.Platform" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.25" Y="5.941" />
+        <Point X="7.25" Y="6.936" />
+        <Point X="7.625" Y="6.936" />
+        <Point X="7.625" Y="7.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Pointer" Type="TrainsAppl.Topology.Pointer" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.562" Y="5.941" />
+        <Point X="7.562" Y="6.75" />
+        <Point X="10.562" Y="6.75" />
+        <Point X="10.562" Y="7.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Thomas" Type="TrainsAppl.Topology.Thomas" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8" Y="5.941" />
+        <Point X="8" Y="6.316" />
+        <Point X="13.312" Y="6.316" />
+        <Point X="13.312" Y="7.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Station" Type="TrainsAppl.Models.DB.Station" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.062" Y="5.941" />
+        <Point X="7.062" Y="6.944" />
+        <Point X="5.75" Y="6.944" />
+        <Point X="5.75" Y="7.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Timetable" Type="TrainsAppl.Models.DB.Timetable" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.938" Y="5.941" />
+        <Point X="6.938" Y="6.76" />
+        <Point X="2.812" Y="6.76" />
+        <Point X="2.812" Y="9.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>MQeJAAaACTMIL+sK1ByAAgZjZAOAcAnMqaE2GRIB4CA=</HashCode>
+      <FileName>Views\MainView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AddView" />
+      <Property Name="Platform" />
+      <Property Name="Pointer" />
+      <Property Name="Thomas" />
+      <Property Name="Station" />
+      <Property Name="Timetable" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TrainsAppl.Views.RegView">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="UserDB" Type="TrainsAppl.Models.DB.UserDB" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.375" Y="3.761" />
+        <Point X="10.375" Y="4.088" />
+        <Point X="9.688" Y="4.088" />
+        <Point X="9.688" Y="4.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAJAAAAACgABBAAAACAAAACACgQAAAAEACAAEAAgBA=</HashCode>
+      <FileName>Views\RegView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UserDB" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

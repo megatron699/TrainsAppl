@@ -49,6 +49,22 @@ namespace TrainsAppl.Topology
 
         }
 
+        public Models.DB.Train Train
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Pointer Pointer
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public Image GetLoco()
         {
             return loco;

@@ -29,6 +29,14 @@ namespace TrainsAppl.Topology
         public SolidBrush DGraybrush { get => dGraybrush; set => dGraybrush = value; }
         public SolidBrush LGraybrush { get => lGraybrush; set => lGraybrush = value; }
 
+        public Pointer Pointer
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public static void AddPlatform(Graphics g, Point point, int h)
         {
             
